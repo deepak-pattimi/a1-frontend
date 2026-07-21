@@ -1,0 +1,627 @@
+{
+  "_instructions": {
+    "site": "A1 Laparoscopy Hospital — https://www.a1laparoscopyhospital.com/",
+    "generated": "2026-04-25",
+    "format": "JSON-LD (Google recommended format)",
+    "rendering_requirement": "ALL blocks must be server-rendered in <head> via getStaticProps / App Router — do NOT inject via useEffect or client-side React",
+    "how_to_use": "Each key in this object is a page. Add the schema block to that page's <Head> inside a <script type='application/ld+json'> tag.",
+    "placeholders": "Search for ALL occurrences of [FILL IN] and replace before deploying. Validate at https://validator.schema.org",
+    "validation_url": "https://validator.schema.org",
+    "rich_results_test": "https://search.google.com/test/rich-results"
+  },
+
+  "homepage": {
+    "_page": "/",
+    "_notes": "Add all 3 blocks (hospital, website, faq) as a single @graph on the homepage",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": ["Hospital", "MedicalOrganization"],
+          "@id": "https://www.a1laparoscopyhospital.com/#hospital",
+          "name": "A1 Laparoscopy Hospital",
+          "url": "https://www.a1laparoscopyhospital.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.a1laparoscopyhospital.com/images/logo.png",
+            "width": 300,
+            "height": 100
+          },
+          "image": "https://www.a1laparoscopyhospital.com/images/hospital-exterior.jpg",
+          "description": "A1 Laparoscopy Hospital in Visakhapatnam offers advanced laparoscopic and bariatric surgeries led by Dr. Naveen Kumar Anem and Dr. I.S. Prathyusha, with 24/7 ICU, diagnostic lab, pharmacy, and anaesthesia support.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "17-1-17, Dr CS Mangamma Building, Opp KGH",
+            "addressLocality": "Maharanipeta",
+            "addressRegion": "Andhra Pradesh",
+            "postalCode": "530002",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "[FILL IN — get from Google Maps pin-drop on exact building, 5 decimal places]",
+            "longitude": "[FILL IN — get from Google Maps pin-drop on exact building, 5 decimal places]"
+          },
+          "telephone": "[FILL IN — format: +91-891-XXXXXXXX]",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          },
+          "medicalSpecialty": ["SurgicalProcedure", "Gastroenterologic", "Obstetric"],
+          "availableService": [
+            {"@type": "MedicalProcedure", "name": "Laparoscopic Surgery"},
+            {"@type": "MedicalProcedure", "name": "Bariatric Surgery"},
+            {"@type": "MedicalProcedure", "name": "Laparoscopic Hernia Repair"},
+            {"@type": "MedicalProcedure", "name": "Laparoscopic Appendectomy"},
+            {"@type": "MedicalProcedure", "name": "Laparoscopic Cholecystectomy"},
+            {"@type": "MedicalProcedure", "name": "Laparoscopic Hysterectomy"},
+            {"@type": "MedicalProcedure", "name": "Hysteroscopy"},
+            {"@type": "MedicalProcedure", "name": "Piles and Fistula Treatment"}
+          ],
+          "employee": [
+            {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"},
+            {"@id": "https://www.a1laparoscopyhospital.com/dr-prathyusha-gynecologist#physician"}
+          ],
+          "hasMap": "https://maps.google.com/?q=A1+Laparoscopy+Hospital+Maharanipeta+Visakhapatnam",
+          "aggregateRating": {
+            "_note": "[FILL IN ONLY IF reviews are displayed on the website itself — not just on Practo/JustDial]",
+            "@type": "AggregateRating",
+            "ratingValue": "[FILL IN — e.g. 4.8]",
+            "reviewCount": "[FILL IN — use your actual Google review count]",
+            "bestRating": "5",
+            "worstRating": "1"
+          },
+          "sameAs": [
+            "https://www.instagram.com/a1laparoscopyhospital/",
+            "https://www.facebook.com/p/A1-Laparoscopy-Hospital-100083178528347/",
+            "https://www.practo.com/visakhapatnam/clinic/a1-hospital-akkayyapalem-1",
+            "https://www.justdial.com/Visakhapatnam/A1-Laparoscopy-Centre-Krishna-Nagar/0891PX891-X891-181219124949-E6L9_BZDET"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.a1laparoscopyhospital.com/#website",
+          "url": "https://www.a1laparoscopyhospital.com/",
+          "name": "A1 Laparoscopy Hospital",
+          "inLanguage": "en-IN",
+          "publisher": {
+            "@id": "https://www.a1laparoscopyhospital.com/#hospital"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.a1laparoscopyhospital.com/#faq",
+          "_note": "Only include this block if FAQ questions are visibly displayed on the homepage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What laparoscopic surgeries are performed at A1 Laparoscopy Hospital?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A1 Laparoscopy Hospital performs laparoscopic surgery, bariatric (weight loss) surgery, hernia repair, appendectomy, gallstone (cholecystectomy) surgery, hysterectomy, hysteroscopy, and piles and fistula treatment. All procedures use minimally invasive techniques for faster recovery and less pain."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who are the doctors at A1 Laparoscopy Hospital in Visakhapatnam?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A1 Laparoscopy Hospital is led by Dr. Naveen Kumar Anem (MBBS, DNB General Surgery, 17+ years of experience in laparoscopic and bariatric surgery) and Dr. I.S. Prathyusha (OB-GYN specialist in laparoscopic gynecology, hysterectomy, and hysteroscopy)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does A1 Laparoscopy Hospital offer 24/7 emergency surgical care?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. A1 Laparoscopy Hospital provides 24/7 comprehensive surgical care with an in-house ICU, diagnostic laboratory, pharmacy, and anaesthesia support available at all times."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where is A1 Laparoscopy Hospital located?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A1 Laparoscopy Hospital is located at 17-1-17, Dr CS Mangamma Building, opposite KGH, Maharanipeta, Visakhapatnam, Andhra Pradesh 530002, India."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the benefits of laparoscopic surgery over open surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Laparoscopic surgery uses small incisions (5–10 mm) and a camera, offering faster recovery (days vs. weeks), less post-operative pain, lower infection risk, minimal scarring, and shorter hospital stay compared to traditional open surgery."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+
+  "doctor_naveen": {
+    "_page": "/dr-naveen-kumar-anem  (rename from /Aboutdr — add 301 redirect)",
+    "_notes": "Add 301 redirect in next.config.js: /Aboutdr -> /dr-naveen-kumar-anem",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician",
+      "name": "Dr. Naveen Kumar Anem",
+      "givenName": "Naveen Kumar",
+      "familyName": "Anem",
+      "honorificPrefix": "Dr.",
+      "url": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem",
+      "image": "https://www.a1laparoscopyhospital.com/images/dr-naveen-kumar-anem.jpg",
+      "description": "Dr. Naveen Kumar Anem is a senior laparoscopic and bariatric surgeon with 17+ years of experience at A1 Laparoscopy Hospital, Visakhapatnam, specialising in hernia repair, bariatric surgery, appendectomy, and gallstone removal.",
+      "medicalSpecialty": [
+        "https://schema.org/SurgicalProcedure",
+        "https://schema.org/Gastroenterologic"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "MBBS",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Dr. NTR University of Health Sciences"
+          },
+          "dateCreated": "2007"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "degree",
+          "name": "DNB — General Surgery",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "National Board of Examinations, India"
+          },
+          "dateCreated": "2011"
+        }
+      ],
+      "knowsAbout": [
+        "Laparoscopic Surgery",
+        "Bariatric Surgery",
+        "Hernia Repair",
+        "Laparoscopic Appendectomy",
+        "Laparoscopic Cholecystectomy",
+        "Piles and Fistula Treatment",
+        "Minimally Invasive Surgery"
+      ],
+      "worksFor": {
+        "@id": "https://www.a1laparoscopyhospital.com/#hospital"
+      },
+      "workLocation": {
+        "@type": "PostalAddress",
+        "streetAddress": "17-1-17, Dr CS Mangamma Building, Opp KGH",
+        "addressLocality": "Maharanipeta",
+        "addressRegion": "Andhra Pradesh",
+        "postalCode": "530002",
+        "addressCountry": "IN"
+      }
+    }
+  },
+
+  "doctor_prathyusha": {
+    "_page": "/dr-prathyusha-gynecologist  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "@id": "https://www.a1laparoscopyhospital.com/dr-prathyusha-gynecologist#physician",
+      "name": "Dr. I.S. Prathyusha",
+      "honorificPrefix": "Dr.",
+      "url": "https://www.a1laparoscopyhospital.com/dr-prathyusha-gynecologist",
+      "image": "https://www.a1laparoscopyhospital.com/images/dr-prathyusha.jpg",
+      "description": "Dr. I.S. Prathyusha is a consultant obstetrician and gynaecologist at A1 Laparoscopy Hospital, Visakhapatnam, specialising in laparoscopic gynecological surgery including hysterectomy, hysteroscopy, ovarian cysts, fibroids, endometriosis, and ectopic pregnancies.",
+      "medicalSpecialty": [
+        "https://schema.org/Obstetric",
+        "https://schema.org/SurgicalProcedure"
+      ],
+      "knowsAbout": [
+        "Laparoscopic Gynecology",
+        "Hysterectomy",
+        "Hysteroscopy",
+        "Ovarian Cyst Treatment",
+        "Fibroid Removal",
+        "Endometriosis Treatment",
+        "Ectopic Pregnancy Management",
+        "Obstetrics and Gynecology"
+      ],
+      "worksFor": {
+        "@id": "https://www.a1laparoscopyhospital.com/#hospital"
+      },
+      "workLocation": {
+        "@type": "PostalAddress",
+        "streetAddress": "17-1-17, Dr CS Mangamma Building, Opp KGH",
+        "addressLocality": "Maharanipeta",
+        "addressRegion": "Andhra Pradesh",
+        "postalCode": "530002",
+        "addressCountry": "IN"
+      }
+    }
+  },
+
+  "service_bariatric": {
+    "_page": "/bariatric-surgery-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/bariatric-surgery-visakhapatnam#procedure",
+          "name": "Bariatric Surgery (Weight Loss Surgery)",
+          "alternateName": "Weight Loss Surgery",
+          "url": "https://www.a1laparoscopyhospital.com/bariatric-surgery-visakhapatnam",
+          "description": "Bariatric surgery at A1 Laparoscopy Hospital involves laparoscopic weight loss procedures for patients with obesity. Performed by Dr. Naveen Kumar Anem with 17+ years of surgical experience in Visakhapatnam.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Abdomen",
+          "preparation": "Pre-operative evaluation including blood tests, ECG, cardiac assessment, and dietary counselling.",
+          "followup": "Regular post-operative consultations, dietary guidance, and monitoring of weight loss progress.",
+          "howPerformed": "Performed laparoscopically through 3–5 small incisions under general anaesthesia.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Bariatric Surgery Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/bariatric-surgery-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_hernia": {
+    "_page": "/hernia-repair-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/hernia-repair-visakhapatnam#procedure",
+          "name": "Laparoscopic Hernia Repair",
+          "url": "https://www.a1laparoscopyhospital.com/hernia-repair-visakhapatnam",
+          "description": "Laparoscopic hernia repair at A1 Laparoscopy Hospital treats inguinal, umbilical, and incisional hernias using minimally invasive mesh reinforcement techniques in Visakhapatnam.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Abdominal Wall",
+          "howPerformed": "Performed laparoscopically under general anaesthesia; mesh placed to reinforce the weakened abdominal wall through 3 small incisions.",
+          "followup": "Recovery typically 1–2 weeks; follow-up consultation at 1 week and 1 month post-surgery.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Hernia Repair Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/hernia-repair-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_laparoscopic": {
+    "_page": "/laparoscopic-surgery-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/laparoscopic-surgery-visakhapatnam#procedure",
+          "name": "Laparoscopic Surgery",
+          "url": "https://www.a1laparoscopyhospital.com/laparoscopic-surgery-visakhapatnam",
+          "description": "A1 Laparoscopy Hospital in Visakhapatnam specialises in advanced minimally invasive laparoscopic surgery for gallstones, hernia, appendix, and other abdominal conditions, performed by Dr. Naveen Kumar Anem.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Abdomen",
+          "howPerformed": "Minimally invasive surgery using a laparoscope (camera) and small incisions instead of a large open cut, under general anaesthesia.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Laparoscopic Surgery Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/laparoscopic-surgery-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_gallstone": {
+    "_page": "/gallstone-surgery-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/gallstone-surgery-visakhapatnam#procedure",
+          "name": "Laparoscopic Cholecystectomy (Gallstone Surgery)",
+          "alternateName": "Gallstone Removal Surgery",
+          "url": "https://www.a1laparoscopyhospital.com/gallstone-surgery-visakhapatnam",
+          "description": "Laparoscopic cholecystectomy (gallbladder removal) at A1 Laparoscopy Hospital in Visakhapatnam treats gallstones and gallbladder disease using minimally invasive techniques with same-day or next-day discharge.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Gallbladder",
+          "howPerformed": "Gallbladder removed laparoscopically through 3–4 small incisions under general anaesthesia. Most patients discharged within 24 hours.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Gallstone Surgery Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/gallstone-surgery-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_appendectomy": {
+    "_page": "/appendectomy-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/appendectomy-visakhapatnam#procedure",
+          "name": "Laparoscopic Appendectomy",
+          "url": "https://www.a1laparoscopyhospital.com/appendectomy-visakhapatnam",
+          "description": "Laparoscopic appendectomy (appendix removal) at A1 Laparoscopy Hospital treats appendicitis through minimally invasive surgery with 24/7 emergency availability in Visakhapatnam.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Appendix",
+          "howPerformed": "Appendix removed laparoscopically through 2–3 small incisions under general anaesthesia. Emergency surgery available 24/7.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Appendectomy Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/appendectomy-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_hysterectomy": {
+    "_page": "/hysterectomy-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/hysterectomy-visakhapatnam#procedure",
+          "name": "Laparoscopic Hysterectomy",
+          "url": "https://www.a1laparoscopyhospital.com/hysterectomy-visakhapatnam",
+          "description": "Laparoscopic hysterectomy at A1 Laparoscopy Hospital in Visakhapatnam is performed by Dr. I.S. Prathyusha (OB-GYN specialist) using minimally invasive techniques for faster recovery and less pain.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Uterus",
+          "howPerformed": "Uterus removed laparoscopically through small incisions under general anaesthesia, avoiding large open incisions.",
+          "followup": "Follow-up at 1 week and 6 weeks post-surgery; pelvic rest for 6 weeks.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-prathyusha-gynecologist#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Hysterectomy Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/hysterectomy-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_hysteroscopy": {
+    "_page": "/hysteroscopy-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/hysteroscopy-visakhapatnam#procedure",
+          "name": "Hysteroscopy",
+          "url": "https://www.a1laparoscopyhospital.com/hysteroscopy-visakhapatnam",
+          "description": "Hysteroscopy at A1 Laparoscopy Hospital allows Dr. I.S. Prathyusha to diagnose and treat uterine conditions including fibroids, polyps, and abnormal bleeding using a thin camera with no external incisions.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Uterus",
+          "howPerformed": "A thin camera (hysteroscope) is passed through the cervix into the uterus — no skin incisions required. Performed under general or local anaesthesia.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-prathyusha-gynecologist#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Hysteroscopy Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/hysteroscopy-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "service_piles_fistula": {
+    "_page": "/piles-fistula-treatment-visakhapatnam  (new page to create)",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalProcedure",
+          "@id": "https://www.a1laparoscopyhospital.com/piles-fistula-treatment-visakhapatnam#procedure",
+          "name": "Piles and Fistula Treatment",
+          "alternateName": "Haemorrhoids and Fistula Surgery",
+          "url": "https://www.a1laparoscopyhospital.com/piles-fistula-treatment-visakhapatnam",
+          "description": "Minimally invasive piles (haemorrhoids) and fistula treatment at A1 Laparoscopy Hospital in Visakhapatnam. Laser and laparoscopic options available for faster recovery with less pain.",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Rectum and Anal Canal",
+          "howPerformed": "Laser or laparoscopic techniques used depending on severity. Day-care procedures available for most cases.",
+          "performer": {"@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://www.a1laparoscopyhospital.com/services"},
+            {"@type": "ListItem", "position": 3, "name": "Piles Fistula Treatment Visakhapatnam", "item": "https://www.a1laparoscopyhospital.com/piles-fistula-treatment-visakhapatnam"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "blog_post_template": {
+    "_page": "/page/[slug]  — apply to ALL 10 blog posts, update values per post",
+    "_note": "Use MedicalWebPage (not BlogPosting) for clinical health content — signals medical relevance to Google",
+    "_author_rule": "Use dr-naveen for general surgery posts; use dr-prathyusha for hysterectomy and hysteroscopy posts",
+    "schema": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "@id": "https://www.a1laparoscopyhospital.com/page/[FILL IN slug]#article",
+          "headline": "[FILL IN — exact post title]",
+          "url": "https://www.a1laparoscopyhospital.com/page/[FILL IN slug]",
+          "description": "[FILL IN — 150-character summary of the post]",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://www.a1laparoscopyhospital.com/images/blog/[FILL IN image filename].jpg",
+            "width": 1200,
+            "height": 628
+          },
+          "datePublished": "[FILL IN — YYYY-MM-DD]",
+          "dateModified": "[FILL IN — YYYY-MM-DD, update whenever post is edited]",
+          "author": {
+            "@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"
+          },
+          "reviewedBy": {
+            "@id": "https://www.a1laparoscopyhospital.com/dr-naveen-kumar-anem#physician"
+          },
+          "publisher": {
+            "@id": "https://www.a1laparoscopyhospital.com/#hospital"
+          },
+          "inLanguage": "en-IN",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "[FILL IN — e.g. Laparoscopic Surgery, Bariatric Surgery, Hernia Repair]"
+          },
+          "medicalAudience": {
+            "@type": "MedicalAudience",
+            "audienceType": "Patient"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.a1laparoscopyhospital.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.a1laparoscopyhospital.com/blogs"},
+            {"@type": "ListItem", "position": 3, "name": "[FILL IN — post title]", "item": "https://www.a1laparoscopyhospital.com/page/[FILL IN slug]"}
+          ]
+        }
+      ]
+    }
+  },
+
+  "blog_post_mapping": {
+    "_note": "Author assignments for all 10 existing blog posts",
+    "posts": [
+      {
+        "slug": "benefits-of-laparoscopic-surgery",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Surgery"
+      },
+      {
+        "slug": "gallstone-surgery-causes-and-treatment-options",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Cholecystectomy"
+      },
+      {
+        "slug": "hernia-repair-laparoscopic-approach",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Hernia Repair"
+      },
+      {
+        "slug": "appendectomy-laparoscopic-procedure",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Appendectomy"
+      },
+      {
+        "slug": "laparoscopic-hysterectomy",
+        "author": "dr-prathyusha-gynecologist",
+        "about": "Laparoscopic Hysterectomy"
+      },
+      {
+        "slug": "hysteroscopy-care-of-uterus",
+        "author": "dr-prathyusha-gynecologist",
+        "about": "Hysteroscopy"
+      },
+      {
+        "slug": "bariatric-surgery-and-weight-loss-what-to-expect",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Bariatric Surgery"
+      },
+      {
+        "slug": "post-surgery-care-tips-for-quick-recovery",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Surgery"
+      },
+      {
+        "slug": "diet-after-laparoscopic-surgery-what-to-eat",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Surgery"
+      },
+      {
+        "slug": "exercise-and-physical-activity-after-laparoscopic-surgery",
+        "author": "dr-naveen-kumar-anem",
+        "about": "Laparoscopic Surgery"
+      }
+    ]
+  },
+
+  "nextjs_implementation": {
+    "_note": "Sample Next.js code for the developer — copy this pattern for every page",
+    "pages_router_example": "import Head from 'next/head'; import homepageSchema from '../schema/homepage.json'; export default function HomePage() { return ( <> <Head> <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(homepageSchema.schema) }} /> </Head> {/* page content */} </> ); } export async function getStaticProps() { return { props: {} }; }",
+    "app_router_example": "export const metadata = { other: { 'application/ld+json': JSON.stringify(homepageSchema.schema) } };",
+    "critical_rule": "NEVER use useEffect or useState to inject schema. It must be in the initial HTML response from the server."
+  },
+
+  "developer_checklist": {
+    "before_deploying": [
+      "Replace ALL [FILL IN] placeholders with real values",
+      "Verify geo coordinates by pin-dropping exact building in Google Maps",
+      "Verify telephone number format: +91-891-XXXXXXXX",
+      "Update all image URLs to absolute paths that return 200",
+      "Set real datePublished and dateModified on all blog posts",
+      "Remove _instructions, _note, _page, _notes keys (they are comments for humans, not valid schema)",
+      "Validate each block at https://validator.schema.org",
+      "Run Rich Results Test at https://search.google.com/test/rich-results",
+      "Confirm schema appears in raw HTML (curl -s https://www.a1laparoscopyhospital.com/ | grep 'application/ld+json')"
+    ],
+    "url_redirects_needed": [
+      "/Aboutdr -> /dr-naveen-kumar-anem (301)",
+      "/Contact -> /contact (301)",
+      "/Reviews -> /reviews (301)",
+      "/Gallery -> /gallery (301)",
+      "http://a1laparoscopyhospital.com/* -> https://www.a1laparoscopyhospital.com/* (301)",
+      "https://a1laparoscopyhospital.com/* -> https://www.a1laparoscopyhospital.com/* (301)"
+    ],
+    "new_pages_to_build": [
+      "/dr-naveen-kumar-anem",
+      "/dr-prathyusha-gynecologist",
+      "/laparoscopic-surgery-visakhapatnam",
+      "/bariatric-surgery-visakhapatnam",
+      "/hernia-repair-visakhapatnam",
+      "/gallstone-surgery-visakhapatnam",
+      "/appendectomy-visakhapatnam",
+      "/hysterectomy-visakhapatnam",
+      "/hysteroscopy-visakhapatnam",
+      "/piles-fistula-treatment-visakhapatnam",
+      "/privacy-policy",
+      "/contact (lowercase)"
+    ]
+  }
+}

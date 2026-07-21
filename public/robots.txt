@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+
+# AI Crawlers - Allow for better AI search visibility
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Omgilibot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.a1laparoscopyhospital.com/api/sitemap.xml
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
