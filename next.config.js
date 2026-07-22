@@ -38,7 +38,7 @@ const nextConfig = {
                 pathname: '/**',
             },
         ],
-        // unoptimized removed - SSR supports image optimization
+        unoptimized: true, // Bypass SSRF protection for local IPs
     },
     async redirects() {
         return [
