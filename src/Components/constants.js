@@ -1,4 +1,4 @@
-export const API_URL = "http://127.0.0.1:8000/api/client/";
-export const ASSETS_URL = "http://127.0.0.1:8000/";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://admin.a1laparoscopyhospital.com/api/client/";
+export const ASSETS_URL = process.env.NEXT_PUBLIC_ASSETS_URL || "https://admin.a1laparoscopyhospital.com/";
 export const GOOGLE_MAP_IFRAME = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3800.7446154057534!2d83.30581889999999!3d17.7095205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a39431209ee4a33%3A0x558d479328060484!2sA1%20Laparoscopy%20Hospital%20%7C%20Laparoscopic%2C%20Bariatric%20Surgeon%2C%20Weight%20Loss%2C%20Laser%20Surgery%20%7C%20vizag!5e0!3m2!1sen!2sin!4v1767685335840!5m2!1sen!2sin"
 // export const API_URL="";

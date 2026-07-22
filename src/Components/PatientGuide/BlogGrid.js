@@ -60,7 +60,7 @@ const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
       <Card className="blog-card h-100 shadow-sm">
         <Card.Img
           variant="top"
-          src={post.blog_image ? (post.blog_image.startsWith('http') ? post.blog_image : `https://admin.a1laparoscopyhospital.com/${post.blog_image}`) : 'https://placehold.co/400x250?text=No+Image'}
+          src={post.blog_image ? (post.blog_image.startsWith('http') ? post.blog_image : `https://admin.a1laparoscopyhospital.com${post.blog_image}`) : 'https://placehold.co/400x250?text=No+Image'}
           className="card-img-top rounded-top"
           alt={post.blog_title}
         />
@@ -74,7 +74,7 @@ const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
             </Link>
           </Card.Title>
           <Card.Text as="div" className="flex-grow-1 text-muted">
-            <div dangerouslySetInnerHTML={{ __html: post.blog_content ? post.blog_content.substring(0, 100) + '...' : '' }} />
+            {post.blog_content ? post.blog_content.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...' : ''}
           </Card.Text>
           <div className="mt-auto blog-meta">
             <small className="text-muted">

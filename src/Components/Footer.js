@@ -4,12 +4,90 @@ import Facebook from '../assets/facebook.png';
 import Instagram from '../assets/instagram.png';
 import LinkedIn from '../assets/linkedin.png';
 import Youtube from '../assets/youtube.png';
-import { FaGoogle, FaWhatsapp } from 'react-icons/fa';
+import { FaGoogle, FaWhatsapp, FaRobot } from 'react-icons/fa';
 import { Modal, Button } from 'react-bootstrap';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/imageUtils';
 import AppointmentForm from '../Components/AppointmentForm';
 
+
+const ChatbotFloat = ({ generalSettings }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { type: 'bot', text: generalSettings.chatbot_welcome_message || `Welcome to the ${generalSettings.website_name || 'Hospital'}. How can I help you today?` }
+  ]);
+  const [showOptions, setShowOptions] = useState(true);
+
+  const handleOptionClick = (option) => {
+    setMessages(prev => [...prev, { type: 'user', text: option }]);
+    setShowOptions(false);
+    
+    if (option === 'Book an Appointment') {
+      window.location.href = '/book-appointment';
+      return;
+    }
+
+    setTimeout(() => {
+      let response = '';
+      let link = null;
+      let linkText = '';
+      
+      if (option === 'Contact Number') {
+        response = `Our contact number is ${generalSettings.footer_phone || 'available on the Contact Us page'}.`;
+      } else if (option === 'Hospital Location') {
+        response = `We are located at: ${generalSettings.footer_address || 'Visakhapatnam'}. `;
+        link = generalSettings.google_maps_url || 'https://www.google.com/maps/place/A1+Laparoscopy+Hospital+Visakhapatnam';
+        linkText = 'View on Google Maps';
+      }
+      
+      setMessages(prev => [...prev, { type: 'bot', text: response, link, linkText }]);
+      setTimeout(() => setShowOptions(true), 800);
+    }, 600);
+  };
+
+  return (
+    <div className="chatbot-wrapper">
+      {isOpen && (
+        <div className="chatbot-window shadow-lg">
+          <div className="chatbot-header d-flex justify-content-between align-items-center">
+             <span className="d-flex align-items-center gap-2"><FaRobot size={20}/> Assistant</span>
+             <button onClick={() => setIsOpen(false)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '1.5rem', lineHeight: '1' }}>&times;</button>
+          </div>
+          <div className="chatbot-body">
+             {messages.map((m, i) => (
+                <div key={i} className={`chat-bubble ${m.type}`}>
+                   {m.text}
+                   {m.link && (
+                     <div className="mt-1">
+                       <a href={m.link} target="_blank" rel="noopener noreferrer" className="text-primary text-decoration-underline" style={{ fontWeight: '500' }}>
+                         {m.linkText}
+                       </a>
+                     </div>
+                   )}
+                </div>
+             ))}
+             {showOptions && (
+               <div className="chat-options mt-3">
+                 <button className="chat-option-btn" onClick={() => handleOptionClick('Book an Appointment')}>Book an Appointment</button>
+                 <button className="chat-option-btn" onClick={() => handleOptionClick('Contact Number')}>Contact Number</button>
+                 <button className="chat-option-btn" onClick={() => handleOptionClick('Hospital Location')}>Hospital Location</button>
+               </div>
+             )}
+          </div>
+        </div>
+      )}
+      <div className="chatbot-float">
+        <button
+          className="chatbot-float-btn"
+          aria-label="Chatbot"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <FaRobot size={30} />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const WhatsAppFloat = ({ phoneNumber }) => {
   const message = encodeURIComponent("Hello, I would like to book an appointment.");
@@ -17,7 +95,7 @@ const WhatsAppFloat = ({ phoneNumber }) => {
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
-    <div className="whatsapp-float">
+    <div className="whatsapp-float d-none d-md-block">
       <a
         href={whatsappUrl}
         target="_blank"
@@ -198,7 +276,10 @@ const Footer = ({ generalSettings }) => {
         </div>
       </footer>
       {generalSettings.whatsapp_no && (
-        <WhatsAppFloat phoneNumber={generalSettings.whatsapp_no.replace(/\D/g, '')} />
+        <>
+          <ChatbotFloat generalSettings={generalSettings} />
+          <WhatsAppFloat phoneNumber={generalSettings.whatsapp_no.replace(/\D/g, '')} />
+        </>
       )}
       
       {/* Appointment Modal - Matching Header.js implementation */}

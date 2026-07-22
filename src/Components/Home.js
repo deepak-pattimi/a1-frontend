@@ -12,6 +12,7 @@ import { API_URL, GOOGLE_MAP_IFRAME, ASSETS_URL } from "./constants";
 import { getImageUrl } from "@/utils/imageUtils";
 import parse from "html-react-parser";
 import Reviews from "./PatientGuide/Reviews";
+import CaseStudiesTestimonials from "./CaseStudiesTestimonials";
 
 
 
@@ -62,6 +63,9 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
   // Gallery is loaded client-side only to keep SSR payload small
   const [imagegallery, setImagegallery] = useState([]);
   const [imagegalleryLoading, setImagegalleryLoading] = useState(true);
+
+  const [testimonials, setTestimonials] = useState([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true);
 
 
   const handleClose = () => setShow(false);
@@ -233,6 +237,18 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
         fetchAboutitems()
       ]);
       getHomeH2Section();
+      
+      try {
+        setTestimonialsLoading(true);
+        const res = await axiosInstance.get("get-testimonials-list");
+        if (res.data && Array.isArray(res.data)) {
+          setTestimonials(res.data);
+        }
+      } catch (err) {
+        console.error("Failed to load testimonials:", err);
+      } finally {
+        setTestimonialsLoading(false);
+      }
     };
 
     loadRemainingContent();
@@ -760,6 +776,8 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
           {/* End Gallery Section */}
           
           <Reviews />
+          
+          <CaseStudiesTestimonials testimonials={testimonials} />
 
           {/* ======= Contact Section ======= */}
           <section id="contact" className="contact">

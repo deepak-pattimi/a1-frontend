@@ -8,13 +8,17 @@ a {
 }
 
 .headerHome {
-  /* position: sticky; */
+  position: sticky;
   top: 0px;
-  background-color: #2c2c2c;
+  background-color: rgba(44, 44, 44, 0.85); /* Translucent dark grey */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   width: 100%;
   z-index: 2000;
   margin: 0;
   padding: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 .headerGallery {
   position: sticky;

@@ -148,7 +148,7 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
                 </div>
 
                 <Image
-                  src={blogPost.blog_image ? (blogPost.blog_image.startsWith('http') ? blogPost.blog_image : `https://admin.a1laparoscopyhospital.com/${blogPost.blog_image}`) : 'https://placehold.co/800x400?text=No+Image'}
+                  src={blogPost.blog_image ? (blogPost.blog_image.startsWith('http') ? blogPost.blog_image : `https://admin.a1laparoscopyhospital.com${blogPost.blog_image}`) : 'https://placehold.co/800x400?text=No+Image'}
                   alt={blogPost.blog_title}
                   className="img-fluid rounded shadow-sm"
                   fluid
@@ -308,7 +308,7 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
                       <div key={`pop-${post.id}`} className="related-post mb-3 pb-3 border-bottom">
                         <Link href={`/blog/${post.slug}`} className="related-link d-flex">
                           <Image
-                            src={post.blog_image ? (post.blog_image.startsWith('http') ? post.blog_image : `https://admin.a1laparoscopyhospital.com/${post.blog_image}`) : 'https://placehold.co/100x100?text=No+Image'}
+                            src={post.blog_image ? (post.blog_image.startsWith('http') ? post.blog_image : `https://admin.a1laparoscopyhospital.com${post.blog_image}`) : 'https://placehold.co/100x100?text=No+Image'}
                             className="related-thumb"
                             alt={post.blog_title}
                           />

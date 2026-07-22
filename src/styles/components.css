@@ -275,6 +275,111 @@
   z-index: 1000;
 }
 
+.chatbot-float {
+  position: fixed;
+  bottom: 110px; /* Right above the whatsapp icon (40px + 60px height + 10px gap) */
+  right: 40px;
+  z-index: 1000;
+}
+
+.chatbot-float-btn {
+  width: 60px;
+  height: 60px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.chatbot-float-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.chatbot-window {
+  position: fixed;
+  bottom: 180px;
+  right: 40px;
+  width: 350px;
+  max-width: calc(100vw - 40px);
+  max-height: 400px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.chatbot-header {
+  background: #2c4964;
+  color: white;
+  padding: 15px 20px;
+  font-weight: bold;
+}
+
+.chatbot-body {
+  padding: 15px;
+  overflow-y: auto;
+  max-height: 350px;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  padding: 10px 15px;
+  border-radius: 15px;
+  max-width: 85%;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.chat-bubble.bot {
+  background: white;
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.chat-bubble.user {
+  background: #007bff;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chat-option-btn {
+  background: white;
+  border: 1px solid #007bff;
+  color: #007bff;
+  padding: 8px 15px;
+  border-radius: 20px;
+  text-align: left;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.chat-option-btn:hover {
+  background: #007bff;
+  color: white;
+}
+
 .whatsapp-float-btn {
   width: 60px;
   height: 60px;
