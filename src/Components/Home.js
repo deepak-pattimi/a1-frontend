@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 // CSS imports moved to _app.js
 import Madampic from "../assets/madampic.png";
 import Shieldpic from "../assets/sheildpic.png";
@@ -13,8 +14,12 @@ import { getImageUrl } from "@/utils/imageUtils";
 import parse from "html-react-parser";
 import Reviews from "./PatientGuide/Reviews";
 import CaseStudiesTestimonials from "./CaseStudiesTestimonials";
+import YoutubeVideos from "./YoutubeVideos";
+import AutoScrollMarquee from "./AutoScrollMarquee";
 
 
+
+import m9 from "../assets/m9.jpg";
 
 // Dynamic imports for heavy components
 const Carousel = dynamic(() => import('react-responsive-carousel').then(mod => mod.Carousel), {
@@ -66,6 +71,11 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
 
   const [testimonials, setTestimonials] = useState([]);
   const [testimonialsLoading, setTestimonialsLoading] = useState(true);
+  
+  const [aboutPage, setAboutPage] = useState(null);
+  const [aboutPageLoading, setAboutPageLoading] = useState(true);
+
+  const [videos, setVideos] = useState([]);
 
 
   const handleClose = () => setShow(false);
@@ -249,6 +259,15 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
       } finally {
         setTestimonialsLoading(false);
       }
+      
+      try {
+        const res = await axiosInstance.get("get-videogallery-list");
+        if (res.data && Array.isArray(res.data)) {
+          setVideos(res.data);
+        }
+      } catch (err) {
+        console.error("Failed to load videos:", err);
+      }
     };
 
     loadRemainingContent();
@@ -261,17 +280,32 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
         const response = await axiosInstance.get('get-imagegallery-list');
         if (response.data && Array.isArray(response.data)) {
           const sorted = response.data
-            .sort((a, b) => a.order_position - b.order_position)
+            .sort((a, b) => (a.order_position ?? 0) - (b.order_position ?? 0))
             .slice(0, 8); // Only show 8 on homepage
           setImagegallery(sorted);
         }
-      } catch (error) {
-        // Gallery is non-critical, fail silently
+      } catch (err) {
+        console.error("Error fetching gallery:", err);
       } finally {
         setImagegalleryLoading(false);
       }
     };
+    
+    const fetchAboutPage = async () => {
+      try {
+        const response = await axiosInstance.get('get-about-page');
+        if (response.data) {
+          setAboutPage(response.data);
+        }
+      } catch (err) {
+        console.error("Error fetching about page:", err);
+      } finally {
+        setAboutPageLoading(false);
+      }
+    };
+
     fetchGallery();
+    fetchAboutPage();
   }, []);
 
 
@@ -489,7 +523,7 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <div className="about-image-container">
                   <Image 
-                    src={h2Section?.image ? getImageUrl(h2Section.image) : getImageUrl('storage/files/1/Gallery/About Main.jpg')} 
+                    src={h2Section?.image ? getImageUrl(h2Section.image) : m9.src} 
                     alt="A1 Hospital Building" 
                     className="about-image-main rounded shadow"
                     width={600}
@@ -689,7 +723,7 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
               </div>
             </div>
             <div className="container-fluid">
-              <div className="row g-0">
+              <div className="row g-0 justify-content-center align-items-center">
                 {imagegalleryLoading ? (
                   // Loading Skeletons
                   Array(8).fill(0).map((_, i) => (
@@ -703,22 +737,39 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
                       }}></div>
                     </div>
                   ))
-                ) : imagegallery.length > 0 ? (
-                  imagegallery.slice(0, 8).map((item) => (
-                    <div className="col-lg-3 col-md-4 gallery-image-container" key={item.id}>
-                      <div className="gallery-item">
-                        <div className="card-body m-3">
-                          <a href="/image-gallery/" className="gallery-lightbox">
+                ) : imagegallery.length > 4 ? (
+                  <AutoScrollMarquee speed={1.5}>
+                    {[...imagegallery, ...imagegallery].map((item, index) => (
+                      <div className="gallery-marquee-item px-2" key={`${item.id}-${index}`} style={{ width: '400px', height: '250px' }}>
+                        <div className="gallery-item" style={{ height: '100%' }}>
+                          <a href="/image-gallery/" className="gallery-lightbox" style={{ display: 'block', height: '100%' }}>
                             <Image
                               src={getImageUrl(item.image)}
                               alt="Gallery"
                               className="img-fluid"
                               width={400}
-                              height={200}
-                              style={{ width: '100%', height: '200px', objectFit: 'cover', display: 'block' }}
+                              height={400}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
                             />
                           </a>
                         </div>
+                      </div>
+                    ))}
+                  </AutoScrollMarquee>
+                ) : imagegallery.length > 0 ? (
+                  imagegallery.map((item) => (
+                    <div className="col-lg-3 col-md-4 gallery-image-container" key={item.id} style={{ height: '250px', marginBottom: '20px' }}>
+                      <div className="gallery-item p-2" style={{ height: '100%' }}>
+                        <a href="/image-gallery/" className="gallery-lightbox" style={{ display: 'block', height: '100%' }}>
+                          <Image
+                            src={getImageUrl(item.image)}
+                            alt="Gallery"
+                            className="img-fluid"
+                            width={400}
+                            height={400}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+                          />
+                        </a>
                       </div>
                     </div>
                   ))
@@ -775,6 +826,40 @@ function Home({ initialBanners, initialSpecialized, initialDepartments }) {
           </section>
           {/* End Gallery Section */}
           
+          {/* ======= Video Gallery Section ======= */}
+          <YoutubeVideos initialVideos={videos} />
+          {/* End Video Gallery Section */}
+          
+          {/* Doctor Glimpse Section */}
+          {!aboutPageLoading && aboutPage && (
+            <section className="doctor-glimpse py-5" style={{ backgroundColor: '#f0f9ff' }}>
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-md-4 text-center mb-4 mb-md-0">
+                    <div className="position-relative d-inline-block" style={{ border: '4px solid #fff', borderRadius: '50%', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', overflow: 'hidden', width: '250px', height: '250px' }}>
+                      <Image 
+                        src={aboutPage.doctor_image ? getImageUrl(aboutPage.doctor_image) : Madampic.src} 
+                        alt={aboutPage.doctor_name || 'Doctor'} 
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-md-8">
+                    <h2 className="mb-2" style={{ color: '#0d2857', fontWeight: 'bold' }}>{aboutPage.doctor_name || 'Dr. Naveen Kumar Anem'}</h2>
+                    <h5 className="mb-3" style={{ color: '#319795' }}>{aboutPage.doctor_heading || 'Chief Surgeon'}</h5>
+                    <div className="doctor-overview text-muted mb-4" style={{ lineHeight: '1.6' }}>
+                      {aboutPage.doctor_overview ? parse(aboutPage.doctor_overview.substring(0, 300) + '...') : <p>Expert laparoscopic and bariatric surgeon with 17+ years of experience...</p>}
+                    </div>
+                    <Link href="/about-doctor" className="btn text-white rounded-pill px-4 py-2" style={{ backgroundColor: '#0d2857', transition: 'all 0.3s' }}>
+                      Read Full Profile <i className="fas fa-arrow-right ms-2"></i>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
           <Reviews />
           
           <CaseStudiesTestimonials testimonials={testimonials} />

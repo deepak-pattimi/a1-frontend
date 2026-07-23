@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { getImageUrl } from '@/utils/imageUtils';
 import "react-image-lightbox/style.css";
 // import "./media.css"; // Moved to _app.js
+import AutoScrollMarquee from "./AutoScrollMarquee";
 import axiosInstance from "../utils/axiosConfig";
 import loader from "../assets/loader/loader.gif";
 
@@ -63,19 +64,38 @@ const ImageLightbox = ({ initialImages }) => {
       <h1 className="visually-hidden">Image Gallery - A1 Laparoscopy Hospital Medical Facilities</h1>
       
       <h3 className="text-center mt-5">Image Gallery</h3>
-      <div className="row container-fluid">
-        {images.length > 0 ? (
+      <div className="container-fluid px-4">
+        <div className="row justify-content-center g-4">
+        {images.length > 4 ? (
+          <AutoScrollMarquee speed={1.5}>
+            {[...images, ...images].map((image, index) => (
+              <div className="gallery-marquee-item px-2" key={`${index}`} style={{ width: '400px' }}>
+                <div className="gallery-image-container">
+                  <Image
+                    className="gallery-image"
+                    src={image}
+                    alt={`Gallery Image ${index + 1}`}
+                    width={400}
+                    height={300}
+                    onClick={() => openLightbox(index % images.length)}
+                    style={{ cursor: 'pointer', width: '100%', height: '300px', objectFit: 'cover', borderRadius: '8px' }}
+                  />
+                </div>
+              </div>
+            ))}
+          </AutoScrollMarquee>
+        ) : images.length > 0 ? (
           images.map((image, index) => (
-            <div className="col-md-3 col-sm-6 mb-4" key={index}>
-              <div className="gallery-image-container">
+            <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={index} style={{ height: '250px' }}>
+              <div className="gallery-image-container" style={{ height: '100%' }}>
                 <Image
                   className="gallery-image"
                   src={image}
                   alt={`Gallery Image ${index + 1}`}
                   width={400}
-                  height={300}
+                  height={400}
                   onClick={() => openLightbox(index)}
-                  style={{ cursor: 'pointer', width: '100%', height: 'auto', objectFit: 'cover' }}
+                  style={{ cursor: 'pointer', width: '100%', height: '100%', objectFit: 'cover', borderRadius: '8px' }}
                 />
               </div>
 
@@ -86,13 +106,14 @@ const ImageLightbox = ({ initialImages }) => {
             <p>No images available</p>
           </div>
         )}
+        </div>
       </div>
 
       {isOpen && (
         <Lightbox
           mainSrc={images[photoIndex]}
-          nextSrc={images[(photoIndex + 1) % images.length]}
-          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          nextSrc={images.length > 1 ? images[(photoIndex + 1) % images.length] : undefined}
+          prevSrc={images.length > 1 ? images[(photoIndex + images.length - 1) % images.length] : undefined}
           onCloseRequest={closeLightbox}
           onMovePrevRequest={() =>
             setPhotoIndex((photoIndex + images.length - 1) % images.length)

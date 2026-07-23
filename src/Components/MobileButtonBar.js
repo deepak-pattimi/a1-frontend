@@ -153,13 +153,15 @@ const MobileButtonBar = () => {
       <Modal 
         show={showAppointmentForm} 
         onHide={handleClose} 
-        centered
-        size="sm"
-        dialogClassName="appointment-modal-compact"
+        size="lg"
+        scrollable={true}
+        backdrop="static"
+        keyboard={false}
+        dialogClassName="premium-appointment-modal"
         restoreFocus={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Please Book Appointment</Modal.Title>
+        <Modal.Header closeButton style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', borderBottom: 'none', padding: '1.5rem' }}>
+          <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="formSubmit">

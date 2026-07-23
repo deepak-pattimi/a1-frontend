@@ -4,6 +4,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 /* Ensure no gaps between header sections */
@@ -13,7 +19,8 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
-@keyframes fadeInUp {
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);

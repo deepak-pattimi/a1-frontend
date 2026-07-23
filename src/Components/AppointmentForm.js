@@ -15,6 +15,7 @@ const AppointmentForm = ({
     const [diseases, setDiseases] = useState([]);
     
     const [doctors, setDoctors] = useState([]);
+    const [timeSlots, setTimeSlots] = useState(['11:00 AM - 02:00 PM', '05:00 PM - 06:00 PM']);
     
     React.useEffect(() => {
         const fetchDiseases = async () => {
@@ -43,8 +44,23 @@ const AppointmentForm = ({
             }
         };
 
+        const fetchSettings = async () => {
+            try {
+                const response = await axiosInstance.get('general-settings');
+                if (response.data && response.data.appointment_time_slots) {
+                    const slots = response.data.appointment_time_slots.split(',').map(s => s.trim()).filter(s => s);
+                    if (slots.length > 0) {
+                        setTimeSlots(slots);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching settings:", error);
+            }
+        };
+
         fetchDiseases();
         fetchDoctors();
+        fetchSettings();
     }, []);
     const [paymentMethod, setPaymentMethod] = useState('offline'); // default to offline
     const [amount] = useState(500); // default amount
@@ -358,11 +374,12 @@ const AppointmentForm = ({
 
     return (
         <form onSubmit={handleSubmit} className={isModal ? "" : "php-email-form"}>
-            <div className={isModal ? "" : "row"}>
-                <div className={isModal ? "col-md-12" : "col-md-4 form-group"}>
+            <div className="row">
+                <div className="col-md-4 form-group mt-3 mt-md-0">
+                    <label>Fullname*</label>
                     <input
                         type="text"
-                        placeholder="Fullname*"
+                        placeholder="Enter your name"
                         name="fullname"
                         id="fullname"
                         value={formData?.fullname || ""}
@@ -371,10 +388,11 @@ const AppointmentForm = ({
                     />
                 </div>
 
-                <div className={isModal ? "col-md-12" : "col-md-4 form-group mt-3 mt-md-0"}>
+                <div className="col-md-4 form-group mt-3 mt-md-0">
+                    <label>Mobile*</label>
                     <input
                         type="number"
-                        placeholder="Mobile*"
+                        placeholder="Enter mobile number"
                         name="mobile"
                         id="mobile"
                         value={formData?.mobile || ""}
@@ -383,10 +401,11 @@ const AppointmentForm = ({
                     />
                 </div>
 
-                <div className={isModal ? "col-md-12" : "col-md-4 form-group mt-3 mt-md-0"}>
+                <div className="col-md-4 form-group mt-3 mt-md-0">
+                    <label>Email (Optional)</label>
                     <input
                         type="email"
-                        placeholder="Email (Optional)"
+                        placeholder="Enter email address"
                         name="email"
                         id="email"
                         value={formData?.email || ""}
@@ -397,7 +416,7 @@ const AppointmentForm = ({
             </div>
 
             <div className="row">
-                <div className={isModal ? "col-md-6" : "col-md-4 form-group mt-3"}>
+                <div className="col-md-4 form-group mt-3">
                     <label id="c_date">Date</label>
                     <input
                         type="date"
@@ -410,19 +429,24 @@ const AppointmentForm = ({
                     />
                 </div>
 
-                <div className={isModal ? "col-md-6" : "col-md-4 form-group mt-3"}>
+                <div className="col-md-4 form-group mt-3">
                     <label id="c_time">Time</label>
-                    <input
-                        type="time"
+                    <select
                         name="selected_time"
                         id="selected_time"
                         value={formData?.selected_time || ""}
-                        onChange={handleTimeChange}
+                        onChange={handleChange}
                         className="form-control mb-3"
-                    />
+                    >
+                        <option value="">--:--</option>
+                        {timeSlots.map((slot, index) => (
+                            <option key={index} value={slot}>{slot}</option>
+                        ))}
+                    </select>
                 </div>
 
-                <div className={isModal ? "" : "col-md-4 form-group mt-3"}>
+                <div className="col-md-4 form-group mt-3">
+                    <label id="c_reason">Select Problem</label>
                     <select
                         className="form-control mb-3"
                         name="reason"
@@ -440,7 +464,7 @@ const AppointmentForm = ({
                     </select>
                 </div>
                 
-                <div className={isModal ? "" : "col-md-12 form-group mt-3"}>
+                <div className="col-md-12 form-group mt-3">
                     <label>Doctor's Name</label>
                     {doctors.length === 1 ? (
                         <input
@@ -471,7 +495,7 @@ const AppointmentForm = ({
                 </div>
                 
                 {formData?.reason === 'other_neurological' && (
-                    <div className={isModal ? "col-md-12 form-group" : "col-md-12 form-group mt-3"}>
+                    <div className="col-md-12 form-group mt-3">
                         <input
                             type="text"
                             placeholder="Please specify your condition name"
@@ -493,9 +517,10 @@ const AppointmentForm = ({
                     value={formData?.message || ""}
                     onChange={handleChange}
                     className="form-control my-3"
-                    rows={5}
+                    rows={isModal ? 2 : 5}
                 />
             </div>
+
 
             {/* Payment Section */}
             <div className="form-group mt-3">

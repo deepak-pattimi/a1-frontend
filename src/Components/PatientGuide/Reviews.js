@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axiosInstance from "../../utils/axiosConfig";
 import loader from "../../assets/loader/loader.gif";
 import { getImageUrl } from "@/utils/imageUtils";
+import AutoScrollMarquee from "../AutoScrollMarquee";
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -71,75 +72,117 @@ function Reviews() {
           <span className="badge rounded-pill bg-white text-primary px-3 py-2 mb-3 shadow-sm border" style={{ letterSpacing: '1px', fontWeight: '600' }}>TESTIMONIALS</span>
           <h2 style={{ fontSize: '2.5rem', fontWeight: '700', color: '#2c4964' }}>Patient Reviews</h2>
         </div>
-        {loading ? (
-          <div className="text-center my-5">
-            <img src={loader.src} alt="Loading..." style={{ height: "50px" }} />
-          </div>
-        ) : (
-          <div className="row g-4">
-            {reviews.length > 0 ? (
-              reviews.map((review) => {
-                const text = stripHtml(review.content);
-                const isExpanded = expanded[review.id];
-                const shouldTruncate = text.length > 150;
-                const displayText = !shouldTruncate || isExpanded ? text : text.slice(0, 150) + "...";
+      </div>
 
-                return (
-                  <div className="col-lg-4 col-md-6 mb-4 d-flex" key={review.id}>
-                    <div className="card shadow-sm border-0 h-100 w-100 p-4">
-                      <div className="d-flex justify-content-between align-items-center mb-3">
-                        <div className="stars">
-                          {[...Array(5)].map((_, i) => (
-                            <i
-                              key={i}
-                              className={`fa fa-star mx-1 ${i < parseInt(review.rating) ? 'text-warning' : 'text-muted'}`}
-                            ></i>
-                          ))}
-                        </div>
-                        <div className="review-date text-muted small">
-                          {new Date(review.created_at).toLocaleDateString()}
-                        </div>
-                      </div>
-                      
-                      <h5 className="font-weight-bold mb-3">{review.name}</h5>
+      {loading ? (
+        <div className="container text-center my-5">
+          <img src={loader.src} alt="Loading..." style={{ height: "50px" }} />
+        </div>
+      ) : (
+        <>
+          {reviews.length > 4 ? (
+            <AutoScrollMarquee speed={1.5}>
+                {[...reviews, ...reviews].map((review, index) => {
+                  const text = stripHtml(review.content);
+                  const isExpanded = expanded[review.id];
+                  const shouldTruncate = text.length > 150;
+                  const displayText = !shouldTruncate || isExpanded ? text : text.slice(0, 150) + "...";
 
-                      {review.image && (
-                        <div className="review-image mb-3 text-center">
-                          <img
-                            src={getImageUrl(review.image)}
-                            alt={`${review.name}'s review`}
-                            className="img-fluid rounded"
-                            style={{ maxHeight: '150px', objectFit: 'cover' }}
-                          />
+                  return (
+                    <div className="review-marquee-item d-flex" key={`${review.id}-${index}`}>
+                      <div className="card shadow-sm border-0 h-100 w-100 p-4" style={{ minHeight: '350px' }}>
+                        <div className="d-flex justify-content-between align-items-center mb-3">
+                          <div className="stars">
+                            {[...Array(5)].map((_, i) => (
+                              <i
+                                key={i}
+                                className={`fa fa-star mx-1 ${i < parseInt(review.rating) ? 'text-warning' : 'text-muted'}`}
+                              ></i>
+                            ))}
+                          </div>
+                          <span className="text-muted small">
+                            {new Date(review.created_at).toLocaleDateString()}
+                          </span>
                         </div>
-                      )}
-
-                      <div className="customerimg mb-3 flex-grow-1">
-                        <p className="text-muted" style={{ lineHeight: '1.6' }}>
-                          {displayText}
+                        <h5 className="card-title fw-bold text-dark">{review.name}</h5>
+                        <p className="card-text text-secondary mt-2 flex-grow-1" style={{ fontSize: '0.95rem', lineHeight: '1.6' }}>
+                          "{displayText}"
+                          {shouldTruncate && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleExpand(review.id);
+                              }}
+                              className="btn btn-link p-0 ms-1 text-primary text-decoration-none"
+                            >
+                              {isExpanded ? 'Read Less' : 'Read More'}
+                            </button>
+                          )}
                         </p>
-                        {shouldTruncate && (
-                          <button 
-                            className="btn btn-link p-0 text-primary fw-bold" 
-                            style={{ textDecoration: 'none' }}
-                            onClick={() => toggleExpand(review.id)}
-                          >
-                            {isExpanded ? "Read Less" : "Read More"}
-                          </button>
-                        )}
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            ) : (
-              <div className="col-12 text-center">
-                <p>No reviews available</p>
-              </div>
-            )}
-          </div>
-        )}
+                  );
+                })}
+            </AutoScrollMarquee>
+          ) : (
+            <div className="container-fluid px-4">
+              <div className="row g-4 justify-content-center">
+                {reviews.length > 0 ? (
+                  reviews.map((review, index) => {
+                    const text = stripHtml(review.content);
+                    const isExpanded = expanded[review.id];
+                    const shouldTruncate = text.length > 150;
+                    const displayText = !shouldTruncate || isExpanded ? text : text.slice(0, 150) + "...";
 
+                    return (
+                      <div className="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex" key={`${review.id}-${index}`}>
+                        <div className="card shadow-sm border-0 h-100 w-100 p-4">
+                          <div className="d-flex justify-content-between align-items-center mb-3">
+                            <div className="stars">
+                              {[...Array(5)].map((_, i) => (
+                                <i
+                                  key={i}
+                                  className={`fa fa-star mx-1 ${i < parseInt(review.rating) ? 'text-warning' : 'text-muted'}`}
+                                ></i>
+                              ))}
+                            </div>
+                            <div className="review-date text-muted small">
+                              {new Date(review.created_at).toLocaleDateString()}
+                            </div>
+                          </div>
+                          
+                          <h5 className="font-weight-bold mb-3">{review.name}</h5>
+
+                          <div className="customerimg mb-3 flex-grow-1">
+                            <p className="text-muted" style={{ lineHeight: '1.6' }}>
+                              {displayText}
+                            </p>
+                            {shouldTruncate && (
+                              <button 
+                                className="btn btn-link p-0 text-primary fw-bold" 
+                                style={{ textDecoration: 'none' }}
+                                onClick={() => toggleExpand(review.id)}
+                              >
+                                {isExpanded ? "Read Less" : "Read More"}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="col-12 text-center">
+                    <p>No reviews available</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+
+      <div className="container">
         <div className="row justify-content-center mt-5">
           <div className="col-md-8">
             <div className="card shadow-sm border-0 p-4">

@@ -223,28 +223,26 @@ const Header = ({ generalSettings, categories }) => {
 
 
                   <li className="nav-link">
-                    <Link href="/Aboutdr">About Us</Link>
-                  </li>
-                  <li className="nav-link">
-                    <Link href="/Contact">Contact Us</Link>
-                  </li>
-
-                  <li className="nav-link">
                     <a href="#">
-                      Gallery
+                      About Doctor
                       <i className="fas fa-caret-down"></i>
                     </a>
                     <div className="dropdown">
                       <ul className="ul-nav2">
                         <li className="dropdown-link">
-                          <Link href="/image-gallery">Image Gallery</Link>
+                          <Link href="/about-doctor">About Us</Link>
                         </li>
                         <li className="dropdown-link">
-                          <Link href="/video-gallery">Video Gallery</Link>
+                          <Link href="/about-clinic">About Clinic</Link>
                         </li>
                       </ul>
                     </div>
                   </li>
+                  <li className="nav-link">
+                    <Link href="/Contact">Contact Us</Link>
+                  </li>
+
+
                 </ul>
               </div>
             </div>
@@ -263,13 +261,15 @@ const Header = ({ generalSettings, categories }) => {
       <Modal 
         show={show} 
         onHide={handleClose} 
-        centered
-        size="sm"
-        dialogClassName="appointment-modal-compact"
+        size="lg"
+        scrollable={true}
+        backdrop="static"
+        keyboard={false}
+        dialogClassName="premium-appointment-modal"
         restoreFocus={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Please Book Appointment</Modal.Title>
+        <Modal.Header closeButton style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', borderBottom: 'none', padding: '1.5rem' }}>
+          <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="formSubmit">

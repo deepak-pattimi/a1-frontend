@@ -71,7 +71,7 @@ export default function ContactPage({ generalSettings }) {
                     }}
                 />
             </Head>
-            <Contact />
+            <Contact generalSettings={generalSettings} />
         </>
     );
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Facebook from '../assets/facebook.png';
 import Instagram from '../assets/instagram.png';
 import LinkedIn from '../assets/linkedin.png';
 import Youtube from '../assets/youtube.png';
-import { FaGoogle, FaWhatsapp, FaRobot } from 'react-icons/fa';
+import { FaGoogle, FaWhatsapp, FaRobot, FaAngleUp } from 'react-icons/fa';
 import { Modal, Button } from 'react-bootstrap';
 import Image from 'next/image';
 import { getImageUrl } from '@/utils/imageUtils';
@@ -105,6 +105,38 @@ const WhatsAppFloat = ({ phoneNumber }) => {
       >
         <FaWhatsapp size={35} />
       </a>
+    </div>
+  );
+};
+
+const ScrollToTopFloat = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
+  return (
+    <div className={`scroll-to-top-float d-none d-md-block ${isVisible ? 'show' : ''}`}>
+      <button onClick={scrollToTop} className="scroll-to-top-btn" aria-label="Scroll to top">
+        <FaAngleUp size={22} />
+      </button>
     </div>
   );
 };
@@ -279,6 +311,7 @@ const Footer = ({ generalSettings }) => {
         <>
           <ChatbotFloat generalSettings={generalSettings} />
           <WhatsAppFloat phoneNumber={generalSettings.whatsapp_no.replace(/\D/g, '')} />
+          <ScrollToTopFloat />
         </>
       )}
       
@@ -286,13 +319,15 @@ const Footer = ({ generalSettings }) => {
       <Modal 
         show={show} 
         onHide={handleClose} 
-        centered
-        size="sm"
-        dialogClassName="appointment-modal-compact"
+        size="lg"
+        scrollable={true}
+        backdrop="static"
+        keyboard={false}
+        dialogClassName="premium-appointment-modal"
         restoreFocus={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Please Book Appointment</Modal.Title>
+        <Modal.Header closeButton style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', borderBottom: 'none', padding: '1.5rem' }}>
+          <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="formSubmit">

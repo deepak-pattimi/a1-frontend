@@ -270,14 +270,14 @@
 
 .whatsapp-float {
   position: fixed;
-  bottom: 40px;
+  bottom: 110px;
   right: 40px;
   z-index: 1000;
 }
 
 .chatbot-float {
   position: fixed;
-  bottom: 110px; /* Right above the whatsapp icon (40px + 60px height + 10px gap) */
+  bottom: 180px;
   right: 40px;
   z-index: 1000;
 }
@@ -408,6 +408,70 @@
   color: white;
 }
 
+.scroll-to-top-float {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.scroll-to-top-float.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scroll-to-top-btn {
+  width: 45px;
+  height: 45px;
+  background-color: #ffffff;
+  color: #f68024;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  cursor: pointer;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.scroll-to-top-btn:hover {
+  background-color: #f68024;
+  transform: translateY(-6px) scale(1.05);
+  color: white;
+  box-shadow: 0 8px 20px rgba(246, 128, 36, 0.3);
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.reviews-marquee-wrapper {
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+.reviews-marquee-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: scrollMarquee 30s linear infinite;
+}
+
+.reviews-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.review-marquee-item {
+  width: 350px;
+  flex-shrink: 0;
+}
+
 .footer-section-title {
   font-size: 18px;
   font-weight: bold;
@@ -521,4 +585,74 @@
 .php-email-form .btn-primary:hover {
   background-color: #1a365d;
   border-color: #1a365d;
+}
+
+.premium-appointment-modal {
+  max-width: 900px !important;
+  width: 95%;
+}
+
+.premium-appointment-modal .modal-content {
+  border-radius: 15px;
+  border: none;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+}
+
+.premium-appointment-modal .modal-header .btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.premium-appointment-modal .modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+/* Premium form styling inside the modal */
+.premium-appointment-modal label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4a5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.premium-appointment-modal .form-control {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  color: #2d3748;
+  background-color: #f8fafc;
+  transition: all 0.2s ease-in-out;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.premium-appointment-modal .form-control:focus {
+  background-color: #fff;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+  outline: none;
+}
+
+.premium-appointment-modal select.form-control {
+  cursor: pointer;
+}
+
+.premium-appointment-modal .btn-primary {
+  background: linear-gradient(135deg, #f68024 0%, #e86e11 100%);
+  border: none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(232, 110, 17, 0.3);
+  transition: transform 0.2s;
+}
+
+.premium-appointment-modal .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 110, 17, 0.4);
 }

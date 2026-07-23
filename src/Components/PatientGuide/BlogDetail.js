@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Button, Badge, Image, Form } from 'react-boo
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { FaCalendarAlt, FaClock, FaUser, FaTags, FaArrowLeft, FaShareAlt, FaHeart, FaComment, FaThumbsUp } from 'react-icons/fa';
+import { API_URL } from '../constants';
 // import './BlogDetail.css'; // Moved to _app.js
 
 const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts = [] }) => {
@@ -32,7 +33,12 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
 
     const fetchBlogDetail = async () => {
       try {
-        const response = await fetch(`https://admin.a1laparoscopyhospital.com/api/client/get-blog-detail/${slug}`, {
+        const response = await fetch(`${API_URL}get-blog-detail/${slug}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
           signal: controller.signal
         });
         const data = await response.json();
@@ -68,8 +74,12 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
 
 
     try {
-      const response = await fetch(`https://admin.a1laparoscopyhospital.com/api/client/like-blog/${blogPost.id}`, {
+      const response = await fetch(`${API_URL}like-blog/${blogPost.id}`, {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       });
 
       if (response.ok) {
@@ -135,7 +145,7 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
 
                   <div className="d-flex align-items-center">
                     <FaCalendarAlt className="me-2 text-primary" />
-                    <span>{new Date(blogPost.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                    <span suppressHydrationWarning>{new Date(blogPost.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
                   </div>
                   <div className="d-flex align-items-center">
                     <FaClock className="me-2 text-primary" />
@@ -314,7 +324,7 @@ const BlogDetail = ({ initialBlog, initialRelatedPosts = [], initialPopularPosts
                           />
                           <div>
                             <h6 className="mb-1">{post.blog_title.substring(0, 40)}{post.blog_title.length > 40 ? '...' : ''}</h6>
-                            <small className="text-muted">
+                            <small className="text-muted" suppressHydrationWarning>
                               {new Date(post.created_at).toLocaleDateString()} • {post.read_time}
                             </small>
                           </div>

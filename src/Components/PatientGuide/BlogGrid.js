@@ -77,7 +77,7 @@ const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
             {post.blog_content ? post.blog_content.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...' : ''}
           </Card.Text>
           <div className="mt-auto blog-meta">
-            <small className="text-muted">
+            <small className="text-muted" suppressHydrationWarning>
               <i className="fas fa-calendar-alt me-1"></i> {new Date(post.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })} •
               <i className="fas fa-clock ms-1 me-1"></i> {post.read_time || '5 min read'} •
               <i className="fas fa-eye ms-1 me-1"></i> {post.views || 0}

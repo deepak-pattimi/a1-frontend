@@ -52,15 +52,15 @@ const GlobalAppointmentPopup = () => {
     <Modal
       show={show}
       onHide={handleClose}
-      centered
-      size="sm"
+      size="lg"
+      scrollable={true}
       backdrop="static"
       keyboard={false}
-      dialogClassName="appointment-modal-compact"
+      dialogClassName="premium-appointment-modal"
       restoreFocus={false}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Book an Appointment</Modal.Title>
+      <Modal.Header closeButton style={{ background: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)', color: 'white', borderBottom: 'none', padding: '1.5rem' }}>
+        <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {/* Pass isModal={true} and our close handler */}
