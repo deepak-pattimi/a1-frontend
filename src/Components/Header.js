@@ -230,7 +230,7 @@ const Header = ({ generalSettings, categories }) => {
                     <div className="dropdown">
                       <ul className="ul-nav2">
                         <li className="dropdown-link">
-                          <Link href="/about-doctor">About Us</Link>
+                          <Link href="/about-doctor">About Doctor</Link>
                         </li>
                         <li className="dropdown-link">
                           <Link href="/about-clinic">About Clinic</Link>

@@ -25,8 +25,12 @@ const DynamicPage = ({ initialPageData }) => {
         pageData.page_name?.toLowerCase().includes('post')));
 
   useEffect(() => {
-    // If we have initial data from SSR, don't fetch again unless slug changes
-    if (initialPageData && !slug) {
+    if (!slug) return;
+
+    // If initialPageData matches the current slug parameter, use it directly
+    if (initialPageData && (initialPageData.slug === slug || initialPageData.page_slug === slug)) {
+      setPageData(initialPageData);
+      setLoading(false);
       return;
     }
 
@@ -56,14 +60,6 @@ const DynamicPage = ({ initialPageData }) => {
       }
     };
 
-    if (slug && !initialPageData) {
-      fetchPageData();
-    } else if (slug && initialPageData) {
-      // Initial data exists but slug might have changed (client navigation)
-      setLoading(false);
-    }
-
-    // Cleanup function
     return () => {
       if (!initialPageData) {
         setPageData(null);

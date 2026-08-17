@@ -1,0 +1,3 @@
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000/api/client/
+NEXT_PUBLIC_ASSETS_URL=http://127.0.0.1:8000

@@ -59,98 +59,34 @@ function AboutDoctor() {
                 </div>
                 <div className="col-8 col-md-9">
                   <h3>{aboutPage?.doctor_name || 'Dr. Naveen Kumar Anem'}</h3>
-                  {(aboutPage?.doctor_designations || [
-                    'Consultant - Laparoscopic Surgeon',
-                    'MBBS, MS (General Surgery)',
-                    'Advanced Training in Minimal Access Surgery',
-                    'Specialist in Laparoscopic and Bariatric Procedures'
-                  ]).map((designation, index) => (
+                  {aboutPage?.doctor_designations && aboutPage.doctor_designations.map((designation, index) => (
                     <p key={index}>{designation}</p>
                   ))}
                 </div>
               </div>
             </div>
 
-            <div className="doctor-overview mt-5">
-              <h2>Overview</h2>
-              {aboutPage?.doctor_overview ? (
-                aboutPage.doctor_overview.split('\n').map((paragraph, idx) => (
-                  paragraph.trim() && <p key={idx}>{paragraph}</p>
-                ))
-              ) : (
-                <>
-                  <p>
-                    Dr. Naveen Kumar Anem is a highly skilled laparoscopic surgeon specializing in minimally invasive surgical procedures. He completed his MBBS followed by MS in General Surgery. He has undergone advanced training in minimal access surgery and is specialized in laparoscopic and bariatric procedures.
-                  </p>
-                  <p>
-                    At A1 Laparoscopy Hospital, Dr. Anem combines years of clinical expertise with the latest in laparoscopic technology to ensure quicker recovery, less pain, and minimal scarring for patients. With a focus on patient safety and personalized care, he provides comprehensive treatment solutions for various surgical conditions.
-                  </p>
-                </>
-              )}
-            </div>
+            {aboutPage?.custom_sections && aboutPage.custom_sections.length > 0 && (
+              aboutPage.custom_sections.map((sec, idx) => {
+                const lines = sec.content ? sec.content.split('\n').filter(l => l.trim().length > 0) : [];
+                const isList = lines.length > 1;
 
-            <div className="doctor-expertise mt-5">
-              <h2>Areas of Expertise</h2>
-              <ul>
-                {(aboutPage?.doctor_expertise || [
-                  'Laparoscopic Gallbladder Removal',
-                  'Minimally Invasive Hernia Repair',
-                  'Laparoscopic Appendectomy',
-                  'Weight Loss Surgery (Bariatric Procedures)',
-                  'Laser Treatment for Varicose Veins',
-                  'Laparoscopic Hysterectomy',
-                  'Ovarian Cyst Removal',
-                  'Fibroid Removal',
-                  'General Surgery',
-                  'Gynecological Procedures'
-                ]).map((expertise, index) => (
-                  <li key={index}>{expertise}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="doctor-awards mt-5">
-              <h2>{aboutPage?.doctor_awards_heading || 'Awards and Recognitions'}</h2>
-              <ul>
-                {(aboutPage?.doctor_awards || [
-                  'Gold Medal in DM Neurology',
-                  'Gold Medal in MBBS (3 subjects)',
-                  'Best Case Presentation Award - API Karnataka Chapter (2016)',
-                  'Gold Medal - Movement Disorder Society of India (2020)'
-                ]).map((award, index) => (
-                  <li key={index}>{award}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="doctor-memberships mt-5">
-              <h2>{aboutPage?.doctor_memberships_heading || 'Memberships'}</h2>
-              <ul>
-                {(aboutPage?.doctor_memberships || [
-                  'International Parkinson and Movement Disorder Society',
-                  'Movement Disorder Society of India',
-                  'American Academy of Neurology',
-                  'Indian Academy of Neurology',
-                  'Indian Medical Association'
-                ]).map((membership, index) => (
-                  <li key={index}>{membership}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="doctor-research mt-5">
-              <h2>{aboutPage?.doctor_research_heading || 'Research Work and Publications'}</h2>
-              <ul>
-                {(aboutPage?.doctor_research || [
-                  'Co-Author: "Medical Management of Movement Disorders" in the 4th edition of the textbook of Neurosurgery',
-                  'Study: "Clinical Profile of Lower Body Parkinsonism in a Tertiary Care Hospital in Southern India"',
-                  'Original Article: "Clinical Spectrum of Movement Disorders in Neurology Inpatients"',
-                  'Review Article: "Primary Angitis of Central Nervous System – A Challenging Diagnosis"'
-                ]).map((research, index) => (
-                  <li key={index}>{research}</li>
-                ))}
-              </ul>
-            </div>
+                return (
+                  <div key={idx} className="doctor-custom-section mt-5">
+                    {sec.heading && <h2>{sec.heading}</h2>}
+                    {isList ? (
+                      <ul>
+                        {lines.map((item, itemIdx) => (
+                          <li key={itemIdx}>{item}</li>
+                        ))}
+                      </ul>
+                    ) : lines.length === 1 ? (
+                      <p>{lines[0]}</p>
+                    ) : null}
+                  </div>
+                );
+              })
+            )}
           </div>
 
           <div className="col-lg-4">
