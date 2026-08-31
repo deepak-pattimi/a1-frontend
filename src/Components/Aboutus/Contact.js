@@ -167,7 +167,7 @@ function Contact({ generalSettings }) {
           <div className={styles.infoCard}>
             <div className={styles.iconWrapper}><FaMapMarkerAlt /></div>
             <h3 className={styles.infoTitle}>Our Location</h3>
-            <p className={styles.infoText}>Maharani Peta, Visakhapatnam, Andhra Pradesh 530002</p>
+            <p className={styles.infoText}>{generalSettings?.address || 'Maharani Peta, Visakhapatnam, Andhra Pradesh 530002'}</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.iconWrapper}><FaClock /></div>

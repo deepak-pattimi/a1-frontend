@@ -9,10 +9,14 @@ export default async function handler(req, res) {
   }
   
   // Security: Only allow images from trusted domains
+  const customBackend = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL;
   const allowedDomains = [
+    customBackend,
     'https://admin.a1laparoscopyhospital.com',
-    'https://a1laparoscopyhospital.com'
-  ];
+    'https://a1laparoscopyhospital.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+  ].filter(Boolean);
   
   const isAllowed = allowedDomains.some(domain => url.startsWith(domain));
   

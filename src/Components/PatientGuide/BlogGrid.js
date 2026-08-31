@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card, Button, Form, Spinner } from 'react-bootstrap';
 import Link from 'next/link';
 import axiosInstance from '../../utils/axiosConfig';
+import { getImageUrl } from '../../utils/imageUtils';
 
 const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -60,7 +61,7 @@ const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
       <Card className="blog-card h-100 shadow-sm">
         <Card.Img
           variant="top"
-          src={post.blog_image ? (post.blog_image.startsWith('http') ? post.blog_image : `https://admin.a1laparoscopyhospital.com${post.blog_image}`) : 'https://placehold.co/400x250?text=No+Image'}
+          src={post.blog_image ? getImageUrl(post.blog_image) : 'https://placehold.co/400x250?text=No+Image'}
           className="card-img-top rounded-top"
           alt={post.blog_title}
         />

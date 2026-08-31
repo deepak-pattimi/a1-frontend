@@ -2,6 +2,7 @@ import React from 'react';
 import BlogDetail from '@/Components/PatientGuide/BlogDetail';
 import Head from 'next/head';
 import axiosInstance from '@/utils/axiosConfig';
+import { getImageUrl } from '@/utils/imageUtils';
 
 export async function getServerSideProps({ params }) {
     try {
@@ -41,7 +42,7 @@ export default function BlogDetailPage({ blog, relatedPosts, popularPosts, gener
     const siteName = generalSettings?.website_name || 'A1 Laparoscopy Hospital';
     const title = blog?.blog_title || 'Blog Post';
     const description = blog?.short_description || blog?.meta_description || `Read ${title} on ${siteName}`;
-    const imageUrl = blog?.blog_image ? (blog.blog_image.startsWith('http') ? blog.blog_image : `https://admin.a1laparoscopyhospital.com${blog.blog_image}`) : generalSettings?.logo;
+    const imageUrl = blog?.blog_image ? getImageUrl(blog.blog_image) : (generalSettings?.logo ? getImageUrl(generalSettings.logo) : '');
     
     return (
         <>

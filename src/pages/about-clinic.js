@@ -43,7 +43,7 @@ export default function AboutClinicPage({ generalSettings }) {
                 {/* Canonical */}
                 <link rel="canonical" href="https://www.a1laparoscopyhospital.com/about-clinic/" />
             </Head>
-            <AboutClinic />
+            <AboutClinic generalSettings={generalSettings} />
         </>
     );
 }

@@ -8,16 +8,24 @@ import Image from 'next/image';
 import axiosInstance from "../../utils/axiosConfig";
 import { getImageUrl } from "@/utils/imageUtils";
 
-function AboutDoctor() {
+function AboutDoctor({ generalSettings: initialSettings }) {
   const router = useRouter();
   const [aboutPage, setAboutPage] = useState(null);
+  const [settings, setSettings] = useState(initialSettings || null);
 
   useEffect(() => {
     axiosInstance
       .get("get-about-page")
       .then((res) => setAboutPage(res.data))
       .catch((err) => console.log(err));
-  }, []);
+
+    if (!initialSettings) {
+      axiosInstance
+        .get("general-settings")
+        .then((res) => setSettings(res.data))
+        .catch((err) => console.log(err));
+    }
+  }, [initialSettings]);
 
   return (
     <div className="about-dr">
@@ -95,15 +103,26 @@ function AboutDoctor() {
               <div className="contact-details mt-3">
                 <p>
                   <i className="fas fa-map-marker-alt me-2"></i>
-                  A1 Laparoscopy Hospital, <br /> C.S. Mangamma Hospital building, Main Rd, <br /> opposite KGH Outgate, Opp KGH OP Gate, <br /> Maharani Peta, Visakhapatnam, Andhra Pradesh 530002
+                  {settings?.address ? (
+                    settings.address.split('\n').map((line, idx) => (
+                      <React.Fragment key={idx}>
+                        {line}
+                        {idx < settings.address.split('\n').length - 1 && <br />}
+                      </React.Fragment>
+                    ))
+                  ) : (
+                    <>
+                      A1 Laparoscopy Hospital, <br /> C.S. Mangamma Hospital building, Main Rd, <br /> opposite KGH Outgate, Opp KGH OP Gate, <br /> Maharani Peta, Visakhapatnam, Andhra Pradesh 530002
+                    </>
+                  )}
                 </p>
                 <p>
                   <i className="fas fa-phone me-2"></i>
-                  +91 78292 22111
+                  {settings?.header_phone || settings?.footer_phone || '+91 78292 22111'}
                 </p>
                 <p>
                   <i className="fas fa-envelope me-2"></i>
-                  contact@a1laparoscopyhospital.com
+                  {settings?.header_email || settings?.footer_email || 'contact@a1laparoscopyhospital.com'}
                 </p>
               </div>
 

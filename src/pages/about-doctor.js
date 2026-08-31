@@ -52,7 +52,7 @@ export default function AboutDoctorPage({ generalSettings }) {
                     }}
                 />
             </Head>
-            <AboutDoctor />
+            <AboutDoctor generalSettings={generalSettings} />
         </>
     );
 }
