@@ -27,9 +27,8 @@ User-agent: FacebookBot
 Allow: /
 
 # Sitemap location
-Sitemap: https://www.a1laparoscopyhospital.com/api/sitemap.xml
+Sitemap: https://www.a1laparoscopyhospital.com/sitemap.xml
 
 # Disallow admin and API routes
 Disallow: /api/
-Disallow: /_next/
 Disallow: /admin/

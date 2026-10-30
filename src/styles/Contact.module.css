@@ -204,6 +204,14 @@
 }
 
 @media (max-width: 768px) {
+  .heroSection { min-height: 220px; padding: 28px 16px; }
+  .contactContainer { padding: 0 16px; }
+  .infoCardsContainer { grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 24px; }
+  .infoCard { padding: 20px; }
+  .iconWrapper { width: 48px; height: 48px; margin-bottom: 12px; }
+  .infoText { overflow-wrap: anywhere; }
+  .mainContent { gap: 24px; margin-bottom: 32px; }
+  .mapSection, .formSection { min-width: 0; width: 100%; }
   .heroTitle {
     font-size: 2rem;
   }
@@ -214,7 +222,7 @@
     flex-direction: column;
   }
   .formSection {
-    padding: 2rem;
+    padding: 24px 18px;
   }
   .mapSection iframe {
     min-height: 350px;

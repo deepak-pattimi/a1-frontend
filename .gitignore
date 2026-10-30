@@ -15,10 +15,14 @@
 
 # next.js
 /.next/
+/.next-local/
 /out/
 
 # production
 /build
+/dist/
+/releases/
+/current
 
 # misc
 .DS_Store
@@ -30,14 +34,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-
-
 # vercel
 .vercel
 
 # env files
 .env*.local
+.env.development
 .env
 .env.production
 !.env.example
-

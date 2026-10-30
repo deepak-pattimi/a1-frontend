@@ -13,17 +13,17 @@ const SCHEMAS_DIR = path.join(__dirname, '../src/utils/schemas');
 
 // Expected pages and their schema types
 const expectedSchemas = [
-  { file: 'index.js', schema: 'Homepage (Hospital + WebSite + FAQPage)' },
-  { file: 'Aboutdr.js', schema: 'Physician (Dr. Naveen Kumar Anem)' },
-  { file: 'dr-prathyusha-gynecologist.js', schema: 'Physician (Dr. I.S. Prathyusha)' },
-  { file: 'bariatric-surgery-visakhapatnam.js', schema: 'MedicalProcedure (Bariatric Surgery)' },
-  { file: 'hernia-repair-visakhapatnam.js', schema: 'MedicalProcedure (Hernia Repair)' },
-  { file: 'laparoscopic-surgery-visakhapatnam.js', schema: 'MedicalProcedure (Laparoscopic Surgery)' },
-  { file: 'gallstone-surgery-visakhapatnam.js', schema: 'MedicalProcedure (Gallstone Surgery)' },
-  { file: 'appendectomy-visakhapatnam.js', schema: 'MedicalProcedure (Appendectomy)' },
-  { file: 'hysterectomy-visakhapatnam.js', schema: 'MedicalProcedure (Hysterectomy)' },
-  { file: 'hysteroscopy-visakhapatnam.js', schema: 'MedicalProcedure (Hysteroscopy)' },
-  { file: 'piles-fistula-treatment-visakhapatnam.js', schema: 'MedicalProcedure (Piles & Fistula)' },
+  { file: 'index.jsx', schema: 'Homepage (Hospital + WebSite + FAQPage)' },
+  { file: 'about-doctor.jsx', schema: 'Physician (Dr. Naveen Kumar Anem)' },
+  { file: 'dr-prathyusha-gynecologist.jsx', schema: 'Physician (Dr. I.S. Prathyusha)' },
+  { file: 'bariatric-surgery-visakhapatnam.jsx', schema: 'MedicalProcedure (Bariatric Surgery)' },
+  { file: 'hernia-repair-visakhapatnam.jsx', schema: 'MedicalProcedure (Hernia Repair)' },
+  { file: 'laparoscopic-surgery-visakhapatnam.jsx', schema: 'MedicalProcedure (Laparoscopic Surgery)' },
+  { file: 'gallstone-surgery-visakhapatnam.jsx', schema: 'MedicalProcedure (Gallstone Surgery)' },
+  { file: 'appendectomy-visakhapatnam.jsx', schema: 'MedicalProcedure (Appendectomy)' },
+  { file: 'hysterectomy-visakhapatnam.jsx', schema: 'MedicalProcedure (Hysterectomy)' },
+  { file: 'hysteroscopy-visakhapatnam.jsx', schema: 'MedicalProcedure (Hysteroscopy)' },
+  { file: 'piles-fistula-treatment-visakhapatnam.jsx', schema: 'MedicalProcedure (Piles & Fistula)' },
 ];
 
 console.log('🔍 SEO Schema Validation Report\n');
@@ -31,7 +31,7 @@ console.log('=' .repeat(60));
 
 // Check if schema utility files exist
 console.log('\n📁 Schema Utility Files:');
-const schemaFiles = ['hospital.js', 'doctors.js', 'services.js', 'blog.js', 'index.js'];
+const schemaFiles = ['hospital.jsx', 'doctors.jsx', 'services.jsx', 'blog.jsx', 'index.jsx'];
 schemaFiles.forEach(file => {
   const filePath = path.join(SCHEMAS_DIR, file);
   const exists = fs.existsSync(filePath);
