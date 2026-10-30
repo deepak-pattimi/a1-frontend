@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "start": "vite preview --host 0.0.0.0",
+    "start": "node server.js",
     "seo:check": "node scripts/validate-schemas.js",
     "ai:check": "node scripts/check-ai-seo.js",
     "schema:validate": "node scripts/validate-schemas.js",
