@@ -4,7 +4,9 @@ const path = require('path');
 const url = require('url');
 
 const PORT = process.env.PORT || 3000;
-const DIST_DIR = path.join(__dirname, 'dist');
+const DIST_DIR = fs.existsSync(path.join(__dirname, 'dist'))
+  ? path.join(__dirname, 'dist')
+  : path.join(__dirname, '.next');
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
@@ -74,5 +76,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`Node frontend server running on port ${PORT}`);
+  console.log(`Node frontend server running on port ${PORT} serving ${DIST_DIR}`);
 });
