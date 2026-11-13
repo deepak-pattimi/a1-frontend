@@ -162,7 +162,7 @@ function Contact({ generalSettings }) {
           <div className={styles.infoCard}>
             <div className={styles.iconWrapper}><FaEnvelope /></div>
             <h3 className={styles.infoTitle}>Email Us</h3>
-            <p className={styles.infoText}>{generalSettings?.header_email || 'info@a1laparoscopyhospital.com'}</p>
+            <p className={styles.infoText}>{generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}</p>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.iconWrapper}><FaMapMarkerAlt /></div>

@@ -43,7 +43,8 @@ function Home({
   initialTestimonials = [],
   initialAboutPage = null,
   initialVideos = [],
-  initialReviews = null
+  initialReviews = null,
+  generalSettings = null
 }) {
 
   const router = useRouter();
@@ -656,28 +657,28 @@ function Home({
                   {h2Section?.stat_1_value && (
                     <div className="p-3 mx-2">
                       <h2 style={{ color: '#fb8110', fontWeight: '800', fontSize: '2.5rem', marginBottom: '5px' }}>{h2Section.stat_1_value}</h2>
-                      <h6 className="text-secondary fw-bold text-uppercase" style={{ letterSpacing: '1px' }}>{h2Section.stat_1_text}</h6>
+                      <p className="text-secondary fw-bold text-uppercase mb-0" style={{ letterSpacing: '1px' }}>{h2Section.stat_1_text}</p>
                     </div>
                   )}
                   
                   {h2Section?.stat_2_value && (
                     <div className="p-3 mx-2">
                       <h2 style={{ color: '#fb8110', fontWeight: '800', fontSize: '2.5rem', marginBottom: '5px' }}>{h2Section.stat_2_value}</h2>
-                      <h6 className="text-secondary fw-bold text-uppercase" style={{ letterSpacing: '1px' }}>{h2Section.stat_2_text}</h6>
+                      <p className="text-secondary fw-bold text-uppercase mb-0" style={{ letterSpacing: '1px' }}>{h2Section.stat_2_text}</p>
                     </div>
                   )}
 
                   {h2Section?.stat_3_value && (
                     <div className="p-3 mx-2">
                       <h2 style={{ color: '#fb8110', fontWeight: '800', fontSize: '2.5rem', marginBottom: '5px' }}>{h2Section.stat_3_value}</h2>
-                      <h6 className="text-secondary fw-bold text-uppercase" style={{ letterSpacing: '1px' }}>{h2Section.stat_3_text}</h6>
+                      <p className="text-secondary fw-bold text-uppercase mb-0" style={{ letterSpacing: '1px' }}>{h2Section.stat_3_text}</p>
                     </div>
                   )}
 
                   {h2Section?.stat_4_value && (
                     <div className="p-3 mx-2">
                       <h2 style={{ color: '#fb8110', fontWeight: '800', fontSize: '2.5rem', marginBottom: '5px' }}>{h2Section.stat_4_value}</h2>
-                      <h6 className="text-secondary fw-bold text-uppercase" style={{ letterSpacing: '1px' }}>{h2Section.stat_4_text}</h6>
+                      <p className="text-secondary fw-bold text-uppercase mb-0" style={{ letterSpacing: '1px' }}>{h2Section.stat_4_text}</p>
                     </div>
                   )}
                 </div>
@@ -812,33 +813,52 @@ function Home({
           </section>
 
           {/* ======= Gallery Section ======= */}
-          <section id="gallery" className="gallery">
-            <div className="container" data-aos="fade-up">
-              <div className="section-title">
-                <h2>Gallery</h2>
-                <p>We are providing wonderful treatment with best quality</p>
+          {(imagegalleryLoading || imagegallery.length > 0) && (
+            <section id="gallery" className="gallery">
+              <div className="container" data-aos="fade-up">
+                <div className="section-title">
+                  <h2>Gallery</h2>
+                  <p>We are providing wonderful treatment with best quality</p>
+                </div>
               </div>
-            </div>
-            <div className="container-fluid">
-              <div className="row g-0 justify-content-center align-items-center">
-                {imagegalleryLoading ? (
-                  // Loading Skeletons
-                  Array(8).fill(0).map((_, i) => (
-                    <div className="col-lg-3 col-md-4 p-2" key={i}>
-                      <div className="skeleton-image" style={{
-                        width: '100%',
-                        height: '200px',
-                        background: '#eee',
-                        borderRadius: '8px',
-                        animation: 'pulse 1.5s infinite ease-in-out'
-                      }}></div>
-                    </div>
-                  ))
-                ) : imagegallery.length > 4 ? (
-                  <AutoScrollMarquee speed={1.5}>
-                    {[...imagegallery, ...imagegallery].map((item, index) => (
-                      <div className="gallery-marquee-item px-2" key={`${item.id}-${index}`} style={{ width: '400px', height: '250px' }}>
-                        <div className="gallery-item" style={{ height: '100%' }}>
+              <div className="container-fluid">
+                <div className="row g-0 justify-content-center align-items-center">
+                  {imagegalleryLoading ? (
+                    // Loading Skeletons
+                    Array(8).fill(0).map((_, i) => (
+                      <div className="col-lg-3 col-md-4 p-2" key={i}>
+                        <div className="skeleton-image" style={{
+                          width: '100%',
+                          height: '200px',
+                          background: '#eee',
+                          borderRadius: '8px',
+                          animation: 'pulse 1.5s infinite ease-in-out'
+                        }}></div>
+                      </div>
+                    ))
+                  ) : imagegallery.length > 4 ? (
+                    <AutoScrollMarquee speed={1.5}>
+                      {[...imagegallery, ...imagegallery].map((item, index) => (
+                        <div className="gallery-marquee-item px-2" key={`${item.id}-${index}`} style={{ width: '400px', height: '250px' }}>
+                          <div className="gallery-item" style={{ height: '100%' }}>
+                            <a href="/image-gallery/" className="gallery-lightbox" style={{ display: 'block', height: '100%' }}>
+                              <Image
+                                src={getImageUrl(item.image)}
+                                alt="Gallery"
+                                className="img-fluid"
+                                width={400}
+                                height={400}
+                                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+                              />
+                            </a>
+                          </div>
+                        </div>
+                      ))}
+                    </AutoScrollMarquee>
+                  ) : (
+                    imagegallery.map((item) => (
+                      <div className="col-lg-3 col-md-4 gallery-image-container" key={item.id} style={{ height: '250px', marginBottom: '20px' }}>
+                        <div className="gallery-item p-2" style={{ height: '100%' }}>
                           <a href="/image-gallery/" className="gallery-lightbox" style={{ display: 'block', height: '100%' }}>
                             <Image
                               src={getImageUrl(item.image)}
@@ -846,81 +866,60 @@ function Home({
                               className="img-fluid"
                               width={400}
                               height={400}
-                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+                              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
                             />
                           </a>
                         </div>
                       </div>
-                    ))}
-                  </AutoScrollMarquee>
-                ) : imagegallery.length > 0 ? (
-                  imagegallery.map((item) => (
-                    <div className="col-lg-3 col-md-4 gallery-image-container" key={item.id} style={{ height: '250px', marginBottom: '20px' }}>
-                      <div className="gallery-item p-2" style={{ height: '100%' }}>
-                        <a href="/image-gallery/" className="gallery-lightbox" style={{ display: 'block', height: '100%' }}>
-                          <Image
-                            src={getImageUrl(item.image)}
-                            alt="Gallery"
-                            className="img-fluid"
-                            width={400}
-                            height={400}
-                            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '10px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
-                          />
-                        </a>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="col-12 text-center py-5">
-                    <p className="text-muted">Stay tuned! Our gallery is being updated.</p>
-                  </div>
-                )}
-                <style>{`
-                  @keyframes pulse {
-                    0% { opacity: 0.6; }
-                    50% { opacity: 1; }
-                    100% { opacity: 0.6; }
-                  }
-                  .skeleton-image {
-                    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-                    background-size: 200% 100%;
-                    animation: skeleton-loading 1.5s infinite;
-                  }
-                  @keyframes skeleton-loading {
-                    0% { background-position: 200% 0; }
-                    100% { background-position: -200% 0; }
-                  }
-                `}</style>
-              </div>
+                    ))
+                  )}
+                  <style>{`
+                    @keyframes pulse {
+                      0% { opacity: 0.6; }
+                      50% { opacity: 1; }
+                      100% { opacity: 0.6; }
+                    }
+                    .skeleton-image {
+                      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+                      background-size: 200% 100%;
+                      animation: skeleton-loading 1.5s infinite;
+                    }
+                    @keyframes skeleton-loading {
+                      0% { background-position: 200% 0; }
+                      100% { background-position: -200% 0; }
+                    }
+                  `}</style>
+                </div>
 
-              <div className="text-center mt-4">
-                <button
-                  className="btn btn-primary"
-                  style={{
-                    backgroundColor: '#2c4964',
-                    borderColor: '#2c4964',
-                    fontWeight: '600',
-                    fontSize: '1.1rem',
-                    transition: 'all 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.backgroundColor = '#1a365d';
-                    e.target.style.transform = 'translateY(-2px)';
-                    e.target.style.boxShadow = '0 4px 15px rgba(44, 73, 100, 0.3)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.backgroundColor = '#2c4964';
-                    e.target.style.transform = 'translateY(0)';
-                    e.target.style.boxShadow = 'none';
-                  }}
-                  onClick={() => router.push('/image-gallery')}
-                >
-                  <i className="fas fa-images me-2"></i>
-                  View Full Gallery
-                </button>
+                <div className="text-center mt-4">
+                  <button
+                    className="btn btn-primary"
+                    style={{
+                      backgroundColor: '#2c4964',
+                      borderColor: '#2c4964',
+                      fontWeight: '600',
+                      fontSize: '1.1rem',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = '#1a365d';
+                      e.target.style.transform = 'translateY(-2px)';
+                      e.target.style.boxShadow = '0 4px 15px rgba(44, 73, 100, 0.3)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = '#2c4964';
+                      e.target.style.transform = 'translateY(0)';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                    onClick={() => router.push('/image-gallery')}
+                  >
+                    <i className="fas fa-images me-2"></i>
+                    View Full Gallery
+                  </button>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
           {/* End Gallery Section */}
           
           {/* ======= Video Gallery Section ======= */}
@@ -944,7 +943,7 @@ function Home({
                   </div>
                   <div className="col-md-8">
                     <h2 className="mb-2" style={{ color: '#0d2857', fontWeight: 'bold' }}>{aboutPage.doctor_name || 'Dr. Naveen Kumar Anem'}</h2>
-                    <h5 className="mb-3" style={{ color: '#319795' }}>{aboutPage.doctor_heading || 'Chief Surgeon'}</h5>
+                    <h3 className="mb-3 h5" style={{ color: '#319795' }}>{aboutPage.doctor_heading || 'Chief Surgeon'}</h3>
                     <div className="doctor-overview text-muted mb-4" style={{ lineHeight: '1.6' }}>
                       {aboutPage.doctor_overview ? parse(aboutPage.doctor_overview.substring(0, 300) + '...') : <p>Expert laparoscopic and bariatric surgeon with 17+ years of experience...</p>}
                     </div>
@@ -957,8 +956,6 @@ function Home({
             </section>
           )}
 
-          <Reviews initialReviews={initialReviews} />
-          
           <CaseStudiesTestimonials testimonials={testimonials} />
 
           {/* ======= Contact Section ======= */}
@@ -975,27 +972,41 @@ function Home({
                   <div className="info">
                     <div className="address">
                       <i className="fa fa-map-marker" />
-                      <h4>Location:</h4>
+                      <h3 className="h4">Location:</h3>
                       <p>
-                        C.S. Mangamma Hospital building, Main Rd, opposite KGH Outgate, Opp KGH OP Gate, Maharani Peta, Visakhapatnam, Andhra Pradesh 530002
+                        {generalSettings?.address ? (
+                          generalSettings.address.split('\n').map((line, idx) => (
+                            <React.Fragment key={idx}>
+                              {line}
+                              {idx < generalSettings.address.split('\n').length - 1 && <br />}
+                            </React.Fragment>
+                          ))
+                        ) : (
+                          'A1 Laparoscopy Hospital, 14-38-1, Gokhale Road, Opposite to American Hospital, Zilla parishad junction, KGH Area, Maharani Peta, Visakhapatnam, Andhra Pradesh 530002'
+                        )}
                       </p>
                     </div>
                     <div className="email">
                       <i className="fa fa-envelope" />
-                      <h4>Email:</h4>
-                      <p>contact@a1laparoscopyhospital.com</p>
+                      <h3 className="h4">Email:</h3>
+                      <p>{generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}</p>
                     </div>
                     <div className="phone">
                       <i className="fa fa-phone" />
-                      <h4>Call:</h4>
-                      <p>+91 78292 22111</p>
+                      <h3 className="h4">Call:</h3>
+                      <p>{generalSettings?.header_phone || generalSettings?.footer_phone || '+91 78292 22111'}</p>
+                    </div>
+                    <div className="hours">
+                      <i className="fa fa-clock-o" />
+                      <h3 className="h4">Operating Hours:</h3>
+                      <p>{generalSettings?.working_hours || 'Open 24 hours (Monday – Sunday)'}</p>
                     </div>
                   </div>
                 </div>
                 <div className="col-lg-8 mt-5 mt-lg-0">
                   <iframe
                     title="Google Map Location"
-                    src={GOOGLE_MAP_IFRAME}
+                    src={generalSettings?.google_maps_url || GOOGLE_MAP_IFRAME}
                     width="100%"
                     height="450"
                     loading="lazy"

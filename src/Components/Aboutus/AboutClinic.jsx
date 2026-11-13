@@ -102,6 +102,7 @@ function AboutClinic({ generalSettings: initialSettings }) {
                   ) : (
                     <>
                       A1 Laparoscopy Hospital, <br /> C.S. Mangamma Hospital building, Main Rd, <br /> opposite KGH Outgate, Opp KGH OP Gate, <br /> Maharani Peta, Visakhapatnam, Andhra Pradesh 530002
+                      A1 Laparoscopy Hospital, 14-38-1, Gokhale Road, Opposite to American Hospital, Zilla parishad junction, KGH Area, Maharani Peta, Visakhapatnam, Andhra Pradesh 530002
                     </>
                   )}
                 </p>
@@ -111,7 +112,7 @@ function AboutClinic({ generalSettings: initialSettings }) {
                 </p>
                 <p>
                   <i className="fas fa-envelope me-2"></i>
-                  {settings?.header_email || settings?.footer_email || 'contact@a1laparoscopyhospital.com'}
+                  {settings?.footer_email || settings?.header_email || 'contact@a1laparoscopyhospital.com'}
                 </p>
               </div>
 

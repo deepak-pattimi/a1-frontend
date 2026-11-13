@@ -315,9 +315,9 @@ function TestimonialCard({ item, onPlay }) {
 
         {/* Bottom Title */}
         <div className="position-absolute bottom-0 start-0 w-100 p-3" style={{ zIndex: 2 }}>
-          <h5 className="text-white mb-1 fw-bold text-truncate" style={{ fontSize: "1rem", textShadow: "0 2px 4px rgba(0,0,0,0.6)" }}>
+          <h3 className="text-white mb-1 fw-bold text-truncate" style={{ fontSize: "1rem", textShadow: "0 2px 4px rgba(0,0,0,0.6)" }}>
             {item.title}
-          </h5>
+          </h3>
           <span className="text-white-50" style={{ fontSize: "0.78rem" }}>
             Tap to watch patient story
           </span>

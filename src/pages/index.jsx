@@ -170,6 +170,7 @@ export default function HomePage({
                 initialAboutPage={aboutPage}
                 initialVideos={videos}
                 initialReviews={reviews}
+                generalSettings={generalSettings}
             />
         </>
     );

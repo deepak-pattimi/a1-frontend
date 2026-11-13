@@ -20,8 +20,8 @@ export const getHomepageSchema = (generalSettings = {}) => {
         description: generalSettings.description || 'A1 Laparoscopy Hospital in Visakhapatnam offers advanced laparoscopic and bariatric surgeries led by Dr. Naveen Kumar Anem and Dr. I.S. Prathyusha, with 24/7 ICU, diagnostic lab, pharmacy, and anaesthesia support.',
         address: {
           '@type': 'PostalAddress',
-          streetAddress: '17-1-17, Dr CS Mangamma Building, Opp KGH',
-          addressLocality: 'Maharanipeta',
+          streetAddress: '14-38-1, Laparoscopy Hospital, Zilla parishad junction, A1, Gokhale Rd, opposite to American Hospital, Krishnagar, KGH Area',
+          addressLocality: 'Maharani Peta, Visakhapatnam',
           addressRegion: 'Andhra Pradesh',
           postalCode: '530002',
           addressCountry: 'IN'
@@ -105,7 +105,7 @@ export const getHomepageSchema = (generalSettings = {}) => {
             name: 'Where is A1 Laparoscopy Hospital located?',
             acceptedAnswer: {
               '@type': 'Answer',
-              text: 'A1 Laparoscopy Hospital is located at 17-1-17, Dr CS Mangamma Building, opposite KGH, Maharanipeta, Visakhapatnam, Andhra Pradesh 530002, India.'
+              text: 'A1 Laparoscopy Hospital is located at 14-38-1, Laparoscopy Hospital, Zilla parishad junction, A1, Gokhale Rd, opposite to American Hospital, Krishnagar, KGH Area, Maharani Peta, Visakhapatnam, Andhra Pradesh 530002, India.'
             }
           },
           {

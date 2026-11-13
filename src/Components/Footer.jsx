@@ -245,8 +245,9 @@ const Footer = ({ generalSettings }) => {
 
                 <div className="footer-contact-info">
                   <p className="text-white">
-                    <strong className="text-white">Phone:</strong> {generalSettings.footer_phone}<br />
-                    <strong className="text-white">Email:</strong> {generalSettings.footer_email}
+                    <strong className="text-white">Phone:</strong> {generalSettings?.footer_phone || generalSettings?.header_phone || '+91 78292 22111'}<br />
+                    <strong className="text-white">Email:</strong> {generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}<br />
+                    <strong className="text-white">Operating Hours:</strong> {generalSettings?.working_hours || 'Open 24 hours (Monday – Sunday)'}
                   </p>
                   
                   {/* Book Appointment Button */}
@@ -261,13 +262,13 @@ const Footer = ({ generalSettings }) => {
 
               {/* Quick Links */}
               <div className="col-lg-4 col-md-6 mb-4 mb-md-0 footer-links">
-                <h4 className="footer-section-title text-white">Quick Links</h4>
+                <h3 className="footer-section-title text-white h4">Quick Links</h3>
                 <LinkList links={quickLinks} />
               </div>
 
               {/* Social Links */}
               <div className="col-lg-4 col-md-6">
-                <h4 className="footer-section-title text-white">Follow Us</h4>
+                <h3 className="footer-section-title text-white h4">Follow Us</h3>
                 <div className="social-links text-center text-lg-end pt-3 pt-lg-0">
                   {generalSettings.youtube_link && (
                     <a href={generalSettings.youtube_link} target="_blank" rel="noopener noreferrer" aria-label="Youtube">

@@ -100,13 +100,7 @@ export default function YoutubeVideos({ initialVideos = [] }) {
   };
 
   if (!processedVideos || processedVideos.length === 0) {
-    return (
-      <div className="container px-0">
-        <div className="text-center py-5">
-          <p className="text-muted">No videos available at the moment.</p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   // Double list for infinite loop in marquee if more than 3 videos
