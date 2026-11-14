@@ -159,9 +159,9 @@ const DynamicPage = ({ initialPageData }) => {
     <HelmetProvider>
       {/* Helmet for dynamic meta tags */}
       <Helmet>
-        <title>{pageData.seo_title || pageData.page_name || 'Dynamic Page'}</title>
-        <meta name="description" content={pageData.seo_description || ''} />
-        <meta name="keywords" content={pageData.seo_keywords || ''} />
+        <title>{pageData.meta_title || pageData.seo_title || pageData.page_name || 'Dynamic Page'}</title>
+        <meta name="description" content={pageData.meta_description || pageData.seo_description || ''} />
+        <meta name="keywords" content={pageData.meta_keywords || pageData.seo_keywords || ''} />
       </Helmet>
 
       <div className="container mt-4 mb-5">

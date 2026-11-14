@@ -46,8 +46,9 @@ export async function loadPageData({ params, res }) {
 
 export default function PageDynamic({ pageData, generalSettings, slug, authorType, about }) {
     const siteName = generalSettings?.website_name || 'A1 Laparoscopy Hospital';
-    const title = pageData?.page_name || pageData?.title || 'Page';
-    const description = pageData?.meta_description || pageData?.short_description || `Learn more about ${title} at ${siteName}`;
+    const rawTitle = pageData?.meta_title || pageData?.seo_title || pageData?.page_name || pageData?.title || 'Page';
+    const title = rawTitle.includes(siteName) ? rawTitle : `${rawTitle} - ${siteName}`;
+    const description = pageData?.meta_description || pageData?.seo_description || pageData?.short_description || `Learn more about ${pageData?.page_name || rawTitle} at ${siteName}`;
     
     // Prepare blog post schema data
     const blogSchemaData = {
@@ -63,18 +64,18 @@ export default function PageDynamic({ pageData, generalSettings, slug, authorTyp
     return (
         <>
             <Head>
-                <title>{`${title} - ${siteName}`}</title>
+                <title>{title}</title>
                 <meta name="description" content={description} />
                 
                 {/* Open Graph */}
                 <meta property="og:type" content="article" />
-                <meta property="og:title" content={`${title} - ${siteName}`} />
+                <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={`https://www.a1laparoscopyhospital.com/page/${slug}`} />
                 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`${title} - ${siteName}`} />
+                <meta property="twitter:title" content={title} />
                 
                 {/* Canonical */}
                 <link rel="canonical" href={`https://www.a1laparoscopyhospital.com/page/${slug}`} />
