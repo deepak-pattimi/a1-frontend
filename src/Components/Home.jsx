@@ -9,7 +9,7 @@ import axiosInstance from "../utils/axiosConfig";
 import loader from "../assets/loader/loader.gif";
 import { toast } from "react-toastify";
 import { useRouter } from "@/ui/router";
-import { API_URL, GOOGLE_MAP_IFRAME, ASSETS_URL } from "./constants";
+import { API_URL, GOOGLE_MAP_IFRAME, ASSETS_URL, getEmbeddableMapUrl } from "./constants";
 import { getImageUrl } from "@/utils/imageUtils";
 import parse from "html-react-parser";
 import Reviews from "./PatientGuide/Reviews";
@@ -1006,7 +1006,7 @@ function Home({
                 <div className="col-lg-8 mt-5 mt-lg-0">
                   <iframe
                     title="Google Map Location"
-                    src={generalSettings?.google_maps_url || GOOGLE_MAP_IFRAME}
+                    src={getEmbeddableMapUrl(generalSettings?.google_maps_url)}
                     width="100%"
                     height="450"
                     loading="lazy"

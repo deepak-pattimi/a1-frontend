@@ -3,7 +3,7 @@ import { useRouter } from '@/ui/router';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axiosInstance from "../../utils/axiosConfig";
-import { GOOGLE_MAP_IFRAME } from "../constants";
+import { GOOGLE_MAP_IFRAME, getEmbeddableMapUrl } from "../constants";
 import styles from "../../styles/Contact.module.css";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 
@@ -181,7 +181,7 @@ function Contact({ generalSettings }) {
           {/* Left Side: Map */}
           <div className={styles.mapSection}>
             <iframe
-              src={generalSettings?.google_maps_url || GOOGLE_MAP_IFRAME}
+              src={getEmbeddableMapUrl(generalSettings?.google_maps_url)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="A1 Laparoscopy Hospital Location"
