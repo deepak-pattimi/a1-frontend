@@ -971,7 +971,7 @@ function Home({
                 <div className="col-lg-4">
                   <div className="info">
                     <div className="address">
-                      <i className="fa fa-map-marker" />
+                      <i className="fas fa-map-marker-alt" />
                       <h3 className="h4">Location:</h3>
                       <p>
                         {generalSettings?.address ? (
@@ -987,17 +987,17 @@ function Home({
                       </p>
                     </div>
                     <div className="email">
-                      <i className="fa fa-envelope" />
+                      <i className="fas fa-envelope" />
                       <h3 className="h4">Email:</h3>
                       <p>{generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}</p>
                     </div>
                     <div className="phone">
-                      <i className="fa fa-phone" />
+                      <i className="fas fa-phone-alt" />
                       <h3 className="h4">Call:</h3>
                       <p>{generalSettings?.header_phone || generalSettings?.footer_phone || '+91 78292 22111'}</p>
                     </div>
                     <div className="hours">
-                      <i className="fa fa-clock-o" />
+                      <i className="fas fa-clock" />
                       <h3 className="h4">Operating Hours:</h3>
                       <p>{generalSettings?.working_hours || 'Open 24 hours (Monday – Sunday)'}</p>
                     </div>

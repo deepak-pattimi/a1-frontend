@@ -2022,12 +2022,14 @@ svg {
   transition: all 0.3s ease-in-out;
 }
 
-.contact .info h4 {
+.contact .info h4,
+.contact .info h3 {
   padding: 0 0 0 60px;
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
   color: #2c4964;
+  line-height: 1.2;
 }
 
 .contact .info p {
@@ -2038,13 +2040,15 @@ svg {
 }
 
 .contact .info .email,
-.contact .info .phone {
+.contact .info .phone,
+.contact .info .hours {
   margin-top: 40px;
 }
 
 .contact .info .email:hover i,
 .contact .info .address:hover i,
-.contact .info .phone:hover i {
+.contact .info .phone:hover i,
+.contact .info .hours:hover i {
   background: #1977cc;
   color: #fff;
 }
