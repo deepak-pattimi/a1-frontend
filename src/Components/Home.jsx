@@ -992,7 +992,7 @@ function Home({
                       <p>{generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}</p>
                     </div>
                     <div className="phone">
-                      <i className="fas fa-phone-alt" />
+                      <i className="fas fa-phone" />
                       <h3 className="h4">Call:</h3>
                       <p>{generalSettings?.header_phone || generalSettings?.footer_phone || '+91 78292 22111'}</p>
                     </div>
