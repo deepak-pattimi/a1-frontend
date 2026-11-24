@@ -43,33 +43,36 @@ export async function loadPageData({ params, res }) {
 
 export default function BlogDetailPage({ blog, relatedPosts, popularPosts, generalSettings, slug }) {
     const siteName = generalSettings?.website_name || 'A1 Laparoscopy Hospital';
-    const title = blog?.blog_title || 'Blog Post';
-    const description = blog?.short_description || blog?.meta_description || `Read ${title} on ${siteName}`;
+    const rawTitle = blog?.meta_title || blog?.blog_title || 'Blog Post';
+    const title = rawTitle.includes(siteName) ? rawTitle : `${rawTitle} - ${siteName}`;
+    const description = blog?.meta_description || blog?.short_description || `Read ${rawTitle} on ${siteName}`;
     const imageUrl = blog?.blog_image ? getImageUrl(blog.blog_image) : (generalSettings?.logo ? getImageUrl(generalSettings.logo) : '');
+    const canonicalUrl = blog?.canonical || `https://a1laparoscopyhospital.com/blog/${slug}`;
     
     return (
         <>
             <Head>
-                <title>{`${title} - ${siteName}`}</title>
+                <title>{title}</title>
                 <meta name="description" content={description} />
+                {blog?.meta_keywords && <meta name="keywords" content={blog.meta_keywords} />}
                 
                 {/* Open Graph */}
                 <meta property="og:type" content="article" />
-                <meta property="og:title" content={`${title} - ${siteName}`} />
+                <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:image" content={imageUrl} />
-                <meta property="og:url" content={`https://a1laparoscopyhospital.com/blog/${slug}`} />
+                <meta property="og:url" content={canonicalUrl} />
                 <meta property="article:published_time" content={blog?.created_at} />
                 <meta property="article:modified_time" content={blog?.updated_at} />
                 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:title" content={`${title} - ${siteName}`} />
+                <meta property="twitter:title" content={title} />
                 <meta property="twitter:description" content={description} />
                 <meta property="twitter:image" content={imageUrl} />
                 
                 {/* Canonical */}
-                <link rel="canonical" href={`https://a1laparoscopyhospital.com/blog/${slug}`} />
+                <link rel="canonical" href={canonicalUrl} />
                 
                 {/* Structured Data for Article */}
                 <script
