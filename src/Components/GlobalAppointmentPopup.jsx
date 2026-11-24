@@ -82,6 +82,7 @@ const GlobalAppointmentPopup = () => {
     <Modal
       show={show}
       onHide={handleClose}
+      animation={false}
       size="lg"
       scrollable={true}
       backdrop={true} // Allow clicking backdrop to dismiss
@@ -97,7 +98,7 @@ const GlobalAppointmentPopup = () => {
         <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {show && <AppointmentFormWrapper closeModal={handleClose} />}
+        <AppointmentFormWrapper closeModal={handleClose} />
       </Modal.Body>
     </Modal>
   );

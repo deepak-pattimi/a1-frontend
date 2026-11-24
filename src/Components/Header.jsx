@@ -279,6 +279,7 @@ const Header = ({ generalSettings, categories }) => {
       <Modal 
         show={show} 
         onHide={handleClose} 
+        animation={false}
         size="lg"
         scrollable={true}
         backdrop="static"
@@ -292,16 +293,14 @@ const Header = ({ generalSettings, categories }) => {
         <Modal.Body>
           <div className="formSubmit">
             <p>We Are Ready To Help You With A Smile!</p>
-            {show && (
-              <AppointmentForm
-                formData={formData}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                loading={loading}
-                isModal={true}
-                closeModal={handleClose}
-              />
-            )}
+            <AppointmentForm
+              formData={formData}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              loading={loading}
+              isModal={true}
+              closeModal={handleClose}
+            />
           </div>
         </Modal.Body>
       </Modal>

@@ -154,6 +154,7 @@ const MobileButtonBar = ({ generalSettings }) => {
       <Modal 
         show={showAppointmentForm} 
         onHide={handleClose} 
+        animation={false}
         size="lg"
         scrollable={true}
         backdrop="static"

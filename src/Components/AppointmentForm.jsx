@@ -1,9 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import loader from "../assets/loader/loader.gif";
 import axiosInstance from '../utils/axiosConfig';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { loadRazorpay } from '../utils/dynamicScriptLoader';
+
+// In-memory + LocalStorage cache for instant 0ms dropdown rendering
+const STORAGE_DISEASES_KEY = 'a1_appointment_diseases';
+const STORAGE_DOCTORS_KEY = 'a1_appointment_doctors';
+const STORAGE_SLOTS_KEY = 'a1_appointment_slots';
+
+const getInitialCache = (key, fallback) => {
+    if (typeof window === 'undefined') return fallback;
+    try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : fallback;
+    } catch (e) {
+        return fallback;
+    }
+};
+
+const setCache = (key, val) => {
+    if (typeof window === 'undefined') return;
+    try {
+        localStorage.setItem(key, JSON.stringify(val));
+    } catch (e) {}
+};
+
+// Immediate eager prefetch on module load
+if (typeof window !== 'undefined') {
+    setTimeout(() => {
+        axiosInstance.get('get-appointment-diseases', { skipCache: true, params: { _t: Date.now() } })
+            .then(res => {
+                const list = Array.isArray(res.data) ? res.data : (Array.isArray(res.data?.data) ? res.data.data : []);
+                if (list.length > 0) setCache(STORAGE_DISEASES_KEY, list);
+            }).catch(() => {});
+
+        axiosInstance.get('get-doctors', { skipCache: true, params: { _t: Date.now() } })
+            .then(res => {
+                const list = Array.isArray(res.data) ? res.data : (Array.isArray(res.data?.data) ? res.data.data : []);
+                if (list.length > 0) setCache(STORAGE_DOCTORS_KEY, list);
+            }).catch(() => {});
+    }, 100);
+}
 
 const AppointmentForm = ({
     formData,
@@ -12,13 +51,17 @@ const AppointmentForm = ({
     closeModal
 }) => {
     const [loading, setLoading] = useState(false);
-    const [diseases, setDiseases] = useState([]);
     
-    const [doctors, setDoctors] = useState([]);
-    const [timeSlots, setTimeSlots] = useState(['11:00 AM - 02:00 PM', '05:00 PM - 06:00 PM']);
-    
-    React.useEffect(() => {
-        const fetchDiseases = async () => {
+    // 0ms INSTANT initialization from cache (never empty if previously fetched)
+    const [diseases, setDiseases] = useState(() => getInitialCache(STORAGE_DISEASES_KEY, []));
+    const [doctors, setDoctors] = useState(() => getInitialCache(STORAGE_DOCTORS_KEY, []));
+    const [timeSlots, setTimeSlots] = useState(() => getInitialCache(STORAGE_SLOTS_KEY, ['11:00 AM - 02:00 PM', '05:00 PM - 06:00 PM']));
+
+    // Background sync: runs instantly and updates if server has changes without blocking the UI
+    useEffect(() => {
+        let isMounted = true;
+
+        const syncDiseases = async () => {
             try {
                 const response = await axiosInstance.get('get-appointment-diseases', {
                     skipCache: true,
@@ -26,13 +69,16 @@ const AppointmentForm = ({
                 });
                 const data = response.data;
                 const list = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
-                setDiseases(list);
+                if (isMounted && list.length > 0) {
+                    setDiseases(list);
+                    setCache(STORAGE_DISEASES_KEY, list);
+                }
             } catch (error) {
-                console.error("Error fetching diseases:", error);
+                console.error("Error syncing diseases:", error);
             }
         };
-        
-        const fetchDoctors = async () => {
+
+        const syncDoctors = async () => {
             try {
                 const response = await axiosInstance.get('get-doctors', {
                     skipCache: true,
@@ -40,36 +86,41 @@ const AppointmentForm = ({
                 });
                 const data = response.data;
                 const list = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
-                setDoctors(list);
-                // Auto-select if there is only 1 doctor
-                if (list.length === 1 && (!formData || !formData.doctor)) {
-                    handleChange({ target: { name: 'doctor', value: list[0].name } });
+                if (isMounted && list.length > 0) {
+                    setDoctors(list);
+                    setCache(STORAGE_DOCTORS_KEY, list);
+                    if (list.length === 1 && (!formData || !formData.doctor)) {
+                        handleChange({ target: { name: 'doctor', value: list[0].name } });
+                    }
                 }
             } catch (error) {
-                console.error("Error fetching doctors:", error);
+                console.error("Error syncing doctors:", error);
             }
         };
 
-        const fetchSettings = async () => {
+        const syncSettings = async () => {
             try {
                 const response = await axiosInstance.get('general-settings', {
                     skipCache: true,
                     params: { _t: Date.now() }
                 });
                 if (response.data && response.data.appointment_time_slots) {
-                    const slots = response.data.appointment_time_slots.split(',').map(s => s.trim()).filter(s => s);
-                    if (slots.length > 0) {
+                    const slots = response.data.appointment_time_slots.split(',').map(s => s.trim()).filter(Boolean);
+                    if (slots.length > 0 && isMounted) {
                         setTimeSlots(slots);
+                        setCache(STORAGE_SLOTS_KEY, slots);
                     }
                 }
             } catch (error) {
-                console.error("Error fetching settings:", error);
+                console.error("Error syncing settings:", error);
             }
         };
 
-        fetchDiseases();
-        fetchDoctors();
-        fetchSettings();
+        syncDiseases();
+        syncDoctors();
+        syncSettings();
+
+        return () => { isMounted = false; };
     }, []);
     const [paymentMethod, setPaymentMethod] = useState('offline'); // default to offline
     const [amount] = useState(500); // default amount
