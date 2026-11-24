@@ -10,7 +10,7 @@ export async function loadPageData({ res }) {
     try {
         const [settingsResponse, blogsResponse] = await Promise.all([
             axiosInstance.get('general-settings'),
-            axiosInstance.get('get-blogs-list')
+            axiosInstance.get('get-blogs-list', { params: { per_page: 100 } })
         ]);
 
         // Strip heavy content from blogs list and groupedCategories to reduce SSR payload size from 8.12MB to under 50KB
