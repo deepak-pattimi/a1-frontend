@@ -155,14 +155,28 @@ function Contact({ generalSettings }) {
         {/* Contact Info Cards */}
         <div className={styles.infoCardsContainer}>
           <div className={styles.infoCard}>
-            <div className={styles.iconWrapper}><FaPhoneAlt /></div>
-            <h3 className={styles.infoTitle}>Call Us 24/7</h3>
-            <p className={styles.infoText}>{generalSettings?.header_phone || '+91 78292 22111'}</p>
+            <a 
+              href={`tel:${(generalSettings?.header_phone || '+91 78292 22111').replace(/[^\d+]/g, '')}`} 
+              className={styles.cardAnchor}
+              aria-label="Call Us 24/7"
+            >
+              <div className={styles.iconWrapper}><FaPhoneAlt /></div>
+              <h3 className={styles.infoTitle}>Call Us 24/7</h3>
+              <p className={styles.infoText}>{generalSettings?.header_phone || '+91 78292 22111'}</p>
+            </a>
           </div>
           <div className={styles.infoCard}>
-            <div className={styles.iconWrapper}><FaEnvelope /></div>
-            <h3 className={styles.infoTitle}>Email Us</h3>
-            <p className={styles.infoText}>{generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}</p>
+            <a 
+              href={`mailto:${(generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com').trim()}`} 
+              className={styles.cardAnchor}
+              aria-label="Email Us"
+            >
+              <div className={styles.iconWrapper}><FaEnvelope /></div>
+              <h3 className={styles.infoTitle}>Email Us</h3>
+              <p className={`${styles.infoText} ${styles.emailText}`}>
+                {generalSettings?.footer_email || generalSettings?.header_email || 'contact@a1laparoscopyhospital.com'}
+              </p>
+            </a>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.iconWrapper}><FaMapMarkerAlt /></div>

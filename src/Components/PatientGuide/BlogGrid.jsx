@@ -131,23 +131,34 @@ const BlogGrid = ({ initialBlogs = [], initialGroupedCategories = [] }) => {
           </div>
         ) : (
           <>
-            {groupedCategories && groupedCategories.length > 0 ? (
-                groupedCategories.map(category => (
-                    category.blogs && category.blogs.length > 0 && (
+            {(() => {
+                const categoriesWithBlogs = (groupedCategories || []).filter(c => c.blogs && c.blogs.length > 0);
+                if (categoriesWithBlogs.length > 0) {
+                    return categoriesWithBlogs.map(category => (
                         <div key={category.id} className="mb-5">
                             <h2 className="mb-4 border-bottom pb-2" style={{color: '#0d6efd', fontWeight: 'bold'}}>{category.name}</h2>
                             <Row>
                                 {category.blogs.map(post => renderBlogCard(post))}
                             </Row>
                         </div>
-                    )
-                ))
-            ) : (
-                <div className="text-center py-5">
-                  <h3>No blog posts found</h3>
-                  <p className="text-muted">Try adjusting your search or filter criteria</p>
-                </div>
-            )}
+                    ));
+                }
+
+                if (initialBlogs && initialBlogs.length > 0) {
+                    return (
+                        <Row>
+                            {initialBlogs.map(post => renderBlogCard(post))}
+                        </Row>
+                    );
+                }
+
+                return (
+                    <div className="text-center py-5">
+                      <h3>No blog posts found</h3>
+                      <p className="text-muted">Try adjusting your search or filter criteria</p>
+                    </div>
+                );
+            })()}
           </>
         )}
       </Container>

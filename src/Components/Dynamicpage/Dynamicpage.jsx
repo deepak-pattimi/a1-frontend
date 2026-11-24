@@ -183,12 +183,11 @@ const DynamicPage = ({ initialPageData }) => {
           <div className="col-lg-10">
             <div className="text-center mb-5">
               <h1 className="display-4 fw-bold">{pageData.page_name}</h1>
-              <div className="title-underline"></div>
             </div>
 
 
             {/* Enhanced Main Content Section with attractive styling */}
-            <div className="content-wrapper mt-5 pt-4 border-top">
+            <div className="content-wrapper mt-5 pt-4">
               <style>
                 {`
                     .content-wrapper {
@@ -201,24 +200,6 @@ const DynamicPage = ({ initialPageData }) => {
                       box-shadow: 0 5px 25px rgba(0,0,0,0.08);
                       position: relative;
                       overflow: hidden;
-                    }
-                    
-                    .content-wrapper:before {
-                      content: '';
-                      position: absolute;
-                      top: 0;
-                      left: 0;
-                      width: 5px;
-                      height: 100%;
-                      background: linear-gradient(to bottom, #3498db, #1abc9c);
-                    }
-                    
-                    .title-underline {
-                      width: 80px;
-                      height: 4px;
-                      background: linear-gradient(to right, #3498db, #1abc9c);
-                      margin: 15px auto;
-                      border-radius: 2px;
                     }
                     
                     .content-wrapper h1,
@@ -237,41 +218,17 @@ const DynamicPage = ({ initialPageData }) => {
                     
                     .content-wrapper h1 {
                       font-size: 2.6rem;
-                      border-bottom: 3px solid #3498db;
                       padding-bottom: 0.8rem;
                       margin-bottom: 2.2rem;
                       display: inline-block;
                     }
                     
-                    .content-wrapper h1:after {
-                      content: '';
-                      position: absolute;
-                      bottom: -3px;
-                      left: 0;
-                      width: 40%;
-                      height: 3px;
-                      background: linear-gradient(to right, #3498db, #1abc9c);
-                      border-radius: 3px;
-                    }
-                    
                     .content-wrapper h2 {
                       font-size: 2.1rem;
-                      border-bottom: 2px solid #3498db;
                       padding-bottom: 0.6rem;
                       margin-bottom: 2rem;
                       position: relative;
                       color: #2c3e50;
-                    }
-                    
-                    .content-wrapper h2:before {
-                      content: '';
-                      position: absolute;
-                      left: 0;
-                      bottom: -8px;
-                      width: 70px;
-                      height: 3px;
-                      background: #1abc9c;
-                      border-radius: 3px;
                     }
                     
                     .content-wrapper h3 {
@@ -497,40 +454,17 @@ const DynamicPage = ({ initialPageData }) => {
                     .content-wrapper strong {
                       font-weight: 700;
                       color: #2c3e50;
-                      background: linear-gradient(to right, #e3f2fd, #d6eaf8);
-                      padding: 0.2rem 0.5rem;
-                      border-radius: 4px;
-                      border-left: 3px solid #3498db;
                     }
                     
                     .content-wrapper em {
                       font-style: italic;
-                      color: #e74c3c;
-                      background: linear-gradient(to right, #fadbd8, #fadbd8);
-                      padding: 0.2rem 0.5rem;
-                      border-radius: 4px;
-                      border-left: 3px solid #e74c3c;
+                      color: #2c3e50;
                     }
                     
                     .content-wrapper hr {
                       border: 0;
-                      height: 1px;
-                      background: linear-gradient(to right, transparent, #ddd, transparent);
-                      margin: 3rem 0;
-                      position: relative;
-                    }
-                    
-                    .content-wrapper hr:before {
-                      content: '';
-                      position: absolute;
-                      top: -8px;
-                      left: 50%;
-                      transform: translateX(-50%);
-                      width: 20px;
-                      height: 20px;
-                      border-radius: 50%;
-                      background: #3498db;
-                      box-shadow: 0 0 0 8px rgba(52, 152, 219, 0.2);
+                      border-top: 1px solid #e2e8f0;
+                      margin: 2.5rem 0;
                     }
                     
                     .content-wrapper code {
@@ -562,25 +496,14 @@ const DynamicPage = ({ initialPageData }) => {
                     }
                     
                     .highlighted-section {
-                      background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
+                      background: #f8f9fa;
                       padding: 2.2rem;
                       border-radius: 15px;
                       margin: 2.5rem 0;
-                      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-                      border-left: 5px solid #1abc9c;
+                      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
                       border: 1px solid #e0e7ee;
                       position: relative;
                       overflow: hidden;
-                    }
-                    
-                    .highlighted-section:before {
-                      content: '';
-                      position: absolute;
-                      top: 0;
-                      left: 0;
-                      width: 100%;
-                      height: 4px;
-                      background: linear-gradient(to right, #3498db, #1abc9c);
                     }
                     
                     .content-wrapper ul, .content-wrapper ol {
