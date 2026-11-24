@@ -322,53 +322,28 @@ const DynamicPage = ({ initialPageData }) => {
                       padding: 0;
                     }
                     
-                    .content-wrapper ul,
-                    .content-wrapper ol {
-                      padding-left: 2.2rem;
+                    .content-wrapper ul {
+                      padding-left: 2rem;
                       margin-bottom: 1.8rem;
-                      list-style: none; /* Remove default list styling */
+                      list-style-type: disc;
+                    }
+                    
+                    .content-wrapper ol {
+                      padding-left: 2rem;
+                      margin-bottom: 1.8rem;
+                      list-style-type: decimal;
                     }
                     
                     .content-wrapper li {
-                      margin-bottom: 0.3rem; /* Further reduced gap between list items */
-                      position: relative;
-                      padding-left: 1.5rem;
+                      margin-bottom: 0.4rem;
                       line-height: 1.7;
-                      list-style: none; /* Ensure no default list styling */
                     }
                     
-                    .content-wrapper li:before {
-                      content: '';
-                      position: absolute;
-                      left: 0;
-                      top: 0.7rem;
-                      width: 8px;
-                      height: 8px;
-                      background: #3498db;
-                      border-radius: 50%;
-                      transition: all 0.3s;
-                    }
-                    
+                    .content-wrapper li:before,
+                    .content-wrapper li::before,
                     .content-wrapper li:hover:before {
-                      background: #1abc9c;
-                      transform: scale(1.2);
-                    }
-                    
-                    .content-wrapper ol li:before {
-                      content: counter(li-counter);
-                      counter-increment: li-counter;
-                      font-size: 0.8rem;
-                      background: linear-gradient(to bottom, #3498db, #1abc9c);
-                      color: white;
-                      border-radius: 50%;
-                      width: 24px;
-                      height: 24px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      position: absolute;
-                      left: 0;
-                      top: 0.4rem;
+                      display: none !important;
+                      content: none !important;
                     }
                     
                     .content-wrapper blockquote {
