@@ -97,7 +97,7 @@ const GlobalAppointmentPopup = () => {
         <Modal.Title style={{ fontWeight: '600', fontSize: '1.5rem', margin: 0 }}>Book an Appointment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <AppointmentFormWrapper closeModal={handleClose} />
+        {show && <AppointmentFormWrapper closeModal={handleClose} />}
       </Modal.Body>
     </Modal>
   );

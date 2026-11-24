@@ -20,10 +20,13 @@ const AppointmentForm = ({
     React.useEffect(() => {
         const fetchDiseases = async () => {
             try {
-                const response = await axiosInstance.get('get-appointment-diseases');
-                if (response.data) {
-                    setDiseases(response.data);
-                }
+                const response = await axiosInstance.get('get-appointment-diseases', {
+                    skipCache: true,
+                    params: { _t: Date.now() }
+                });
+                const data = response.data;
+                const list = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
+                setDiseases(list);
             } catch (error) {
                 console.error("Error fetching diseases:", error);
             }
@@ -31,13 +34,16 @@ const AppointmentForm = ({
         
         const fetchDoctors = async () => {
             try {
-                const response = await axiosInstance.get('get-doctors');
-                if (response.data) {
-                    setDoctors(response.data);
-                    // Auto-select if there is only 1 doctor
-                    if (response.data.length === 1 && (!formData || !formData.doctor)) {
-                        handleChange({ target: { name: 'doctor', value: response.data[0].name } });
-                    }
+                const response = await axiosInstance.get('get-doctors', {
+                    skipCache: true,
+                    params: { _t: Date.now() }
+                });
+                const data = response.data;
+                const list = Array.isArray(data) ? data : (Array.isArray(data?.data) ? data.data : []);
+                setDoctors(list);
+                // Auto-select if there is only 1 doctor
+                if (list.length === 1 && (!formData || !formData.doctor)) {
+                    handleChange({ target: { name: 'doctor', value: list[0].name } });
                 }
             } catch (error) {
                 console.error("Error fetching doctors:", error);
@@ -46,7 +52,10 @@ const AppointmentForm = ({
 
         const fetchSettings = async () => {
             try {
-                const response = await axiosInstance.get('general-settings');
+                const response = await axiosInstance.get('general-settings', {
+                    skipCache: true,
+                    params: { _t: Date.now() }
+                });
                 if (response.data && response.data.appointment_time_slots) {
                     const slots = response.data.appointment_time_slots.split(',').map(s => s.trim()).filter(s => s);
                     if (slots.length > 0) {
